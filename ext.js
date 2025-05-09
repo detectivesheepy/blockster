@@ -7439,6 +7439,13 @@
       `;
       this.inputContainer.appendChild(this.promptInput);
 
+      this.promptInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          this.sendButton.onclick();
+          event.preventDefault();
+        }
+      });
+
       this.buttonContainer = document.createElement("div");
       this.buttonContainer.style.cssText = `
         ${styles.flexDisplay}
@@ -7662,7 +7669,9 @@
 
       try {
         this.responseArea.innerHTML +=
-          "<b>You:</b> " + this.promptInput.value + "<br>";
+          "<b>You:</b> " +
+          this.promptInput.value +
+          "<br><div id='generating-temp'>Generating...</div>";
         const apiResponse = await fetch(geminiUrl, {
           method: "POST",
           headers: {
@@ -7684,6 +7693,7 @@
           const responseText = result.candidates[0].content.parts[0].text;
           const responseId = `response-${Date.now()}`;
           let processedResponseText = responseText;
+          +document.getElementById("generating-temp").remove();
           const scratchCodeRegex = /```scratch\n([\s\S]*?)```/g;
           let match;
           let scratchblocksHTML = "";
@@ -7719,7 +7729,6 @@
           }
           this.responseArea.innerHTML += `<div class="${responseId}"><b>Pang:</b> ${processedResponseText.replace(/([.?!])\s*(?=[A-Z])/g, "$1<br>")}<br>${scratchblocksHTML}</div>`;
           this.history.push("<b>Prompt:</b> " + prompt + "/n");
-          this.history.push(responseText + "<hr>");
           const newResponseDiv = this.responseArea.querySelector(
             `.${responseId}`,
           );
