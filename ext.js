@@ -1,11 +1,11 @@
 (function () {
   "use strict";
   /**
-   * scratchblocks v3.6.2
+   * scratchblocks v3.6.4
    * https://scratchblocks.github.io/
-   * Render scratchblocks code to SVG images.
+   * Make pictures of Scratch blocks from text.
    *
-   * Copyright 2013–2023, Tim Radvan
+   * Copyright 2013–2024, Tim Radvan
    * @license MIT
    */
 
@@ -14,29 +14,29 @@
     function e(e, t) {
       var s = Object.keys(e);
       if (Object.getOwnPropertySymbols) {
-        var r = Object.getOwnPropertySymbols(e);
+        var i = Object.getOwnPropertySymbols(e);
         t &&
-          (r = r.filter(function (t) {
+          (i = i.filter(function (t) {
             return Object.getOwnPropertyDescriptor(e, t).enumerable;
           })),
-          s.push.apply(s, r);
+          s.push.apply(s, i);
       }
       return s;
     }
     function t(t) {
       for (var s = 1; s < arguments.length; s++) {
-        var r = null != arguments[s] ? arguments[s] : {};
+        var i = null != arguments[s] ? arguments[s] : {};
         s % 2
-          ? e(Object(r), !0).forEach(function (e) {
-              i(t, e, r[e]);
+          ? e(Object(i), !0).forEach(function (e) {
+              r(t, e, i[e]);
             })
           : Object.getOwnPropertyDescriptors
-            ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(r))
-            : e(Object(r)).forEach(function (e) {
+            ? Object.defineProperties(t, Object.getOwnPropertyDescriptors(i))
+            : e(Object(i)).forEach(function (e) {
                 Object.defineProperty(
                   t,
                   e,
-                  Object.getOwnPropertyDescriptor(r, e),
+                  Object.getOwnPropertyDescriptor(i, e),
                 );
               });
       }
@@ -44,22 +44,22 @@
     }
     function s(e, t) {
       for (var s = 0; s < t.length; s++) {
-        var r = t[s];
-        (r.enumerable = r.enumerable || !1),
-          (r.configurable = !0),
-          "value" in r && (r.writable = !0),
-          Object.defineProperty(e, h(r.key), r);
+        var i = t[s];
+        (i.enumerable = i.enumerable || !1),
+          (i.configurable = !0),
+          "value" in i && (i.writable = !0),
+          Object.defineProperty(e, h(i.key), i);
       }
     }
-    function r(e, t, r) {
+    function i(e, t, i) {
       return (
         t && s(e.prototype, t),
-        r && s(e, r),
+        i && s(e, i),
         Object.defineProperty(e, "prototype", { writable: !1 }),
         e
       );
     }
-    function i(e, t, s) {
+    function r(e, t, s) {
       return (
         (t = h(t)) in e
           ? Object.defineProperty(e, t, {
@@ -79,8 +79,8 @@
           : function (e) {
               for (var t = 1; t < arguments.length; t++) {
                 var s = arguments[t];
-                for (var r in s)
-                  Object.prototype.hasOwnProperty.call(s, r) && (e[r] = s[r]);
+                for (var i in s)
+                  Object.prototype.hasOwnProperty.call(s, i) && (e[i] = s[i]);
               }
               return e;
             }),
@@ -124,8 +124,8 @@
     }
     function c(e, t) {
       (null == t || t > e.length) && (t = e.length);
-      for (var s = 0, r = Array(t); s < t; s++) r[s] = e[s];
-      return r;
+      for (var s = 0, i = Array(t); s < t; s++) i[s] = e[s];
+      return i;
     }
     function l(e, t) {
       var s =
@@ -137,17 +137,17 @@
           (t && e && "number" == typeof e.length)
         ) {
           s && (e = s);
-          var r = 0,
-            i = function () {};
+          var i = 0,
+            r = function () {};
           return {
-            s: i,
+            s: r,
             n: function () {
-              return r >= e.length ? { done: !0 } : { done: !1, value: e[r++] };
+              return i >= e.length ? { done: !0 } : { done: !1, value: e[i++] };
             },
             e: function (e) {
               throw e;
             },
-            f: i,
+            f: r,
           };
         }
         throw new TypeError(
@@ -182,8 +182,8 @@
         if ("object" != typeof e || null === e) return e;
         var s = e[Symbol.toPrimitive];
         if (void 0 !== s) {
-          var r = s.call(e, t || "default");
-          if ("object" != typeof r) return r;
+          var i = s.call(e, t || "default");
+          if ("object" != typeof i) return i;
           throw new TypeError("@@toPrimitive must return a primitive value.");
         }
         return ("string" === t ? String : Number)(e);
@@ -228,14 +228,14 @@
       v = /(%[a-zA-Z0-9](?:\.[a-zA-Z0-9]+)?)/,
       b = RegExp(v.source, "g"),
       m = /(@[a-zA-Z]+)/,
-      A = RegExp(v.source + "|" + m.source + "| +", "g"),
-      k = /^#(?:[0-9a-fA-F]{3}){1,2}?$/;
+      k = RegExp(v.source + "|" + m.source + "| +", "g"),
+      A = /^#(?:[0-9a-fA-F]{3}){1,2}?$/;
     function w(e) {
       var t = y.exec(e);
       return t ? +t[1] : 0;
     }
     function O(e) {
-      var t = e.split(A).filter(function (e) {
+      var t = e.split(k).filter(function (e) {
           return e;
         }),
         s = t.filter(function (e) {
@@ -1960,7 +1960,7 @@
         var t = {
           id: e.id,
           spec: e.spec,
-          parts: e.spec.split(A).filter(function (e) {
+          parts: e.spec.split(k).filter(function (e) {
             return e;
           }),
           selector: e.selector || "sb3:" + e.id,
@@ -1985,35 +1985,35 @@
         return (function (e, t) {
           var s = (t.blocksByHash = {});
           Object.keys(t.commands).forEach(function (e) {
-            var r = t.commands[e],
-              i = E[e],
-              n = S(r);
-            s[n] || (s[n] = []), s[n].push(i);
-            var o = m.exec(i.spec);
+            var i = t.commands[e],
+              r = E[e],
+              n = S(i);
+            s[n] || (s[n] = []), s[n].push(r);
+            var o = m.exec(r.spec);
             if (o) {
               var a = o[0],
                 c = n.replace(S(a), R[a]);
-              s[c] || (s[c] = []), s[c].push(i);
+              s[c] || (s[c] = []), s[c].push(r);
             }
           }),
             (t.nativeAliases = {}),
             Object.keys(t.aliases).forEach(function (e) {
-              var r = t.aliases[e],
-                i = E[r];
-              if (void 0 === i) throw Error("Invalid alias '" + r + "'");
+              var i = t.aliases[e],
+                r = E[i];
+              if (void 0 === r) throw Error("Invalid alias '" + i + "'");
               var n = S(e);
               s[n] || (s[n] = []),
-                s[n].push(i),
-                t.nativeAliases[r] || (t.nativeAliases[r] = []),
-                t.nativeAliases[r].push(e);
+                s[n].push(r),
+                t.nativeAliases[i] || (t.nativeAliases[i] = []),
+                t.nativeAliases[i].push(e);
             }),
             Object.keys(t.renamedBlocks || {}).forEach(function (e) {
               var s = t.renamedBlocks[e];
               if (!E[s]) throw Error("Unknown ID: " + s);
-              var r = E[s],
-                i = S(e);
-              I.blocksByHash[i] || (I.blocksByHash[i] = []),
-                I.blocksByHash[i].push(r);
+              var i = E[s],
+                r = S(e);
+              I.blocksByHash[r] || (I.blocksByHash[r] = []),
+                I.blocksByHash[r].push(i);
             }),
             (t.nativeDropdowns = {}),
             Object.keys(t.dropdowns).forEach(function (e) {
@@ -2061,38 +2061,39 @@
         "e ^",
         "10 ^",
       ],
+      name: "English",
       soundEffects: ["pitch", "pan left/right"],
       microbitWhen: ["moved", "shaken", "jumped"],
       osis: ["other scripts in sprite", "other scripts in stage"],
       dropdowns: {},
       commands: {},
     };
-    function x(e, t) {
+    function N(e, t) {
       if (!E[e]) throw Error("Unknown ID: " + e);
       E[e].accepts = t;
     }
-    function N(e, t, s) {
-      x(e, function (e, t, r) {
-        return s(t, r);
+    function x(e, t, s) {
+      N(e, function (e, t, i) {
+        return s(t, i);
       }),
-        x(t, function (e, t, r) {
-          return !s(t, r);
+        N(t, function (e, t, i) {
+          return !s(t, i);
         });
     }
     function B(e) {
       var t,
         s = [],
-        r = l(e.children);
+        i = l(e.children);
       try {
-        for (r.s(); !(t = r.n()).done; ) {
-          var i = t.value;
-          if (!i.isLabel) return;
-          s.push(i.value);
+        for (i.s(); !(t = i.n()).done; ) {
+          var r = t.value;
+          if (!r.isLabel) return;
+          s.push(r.value);
         }
       } catch (e) {
-        r.e(e);
+        i.e(e);
       } finally {
-        r.f();
+        i.f();
       }
       return s.join(" ");
     }
@@ -2103,22 +2104,22 @@
       I.commands[e.id] = e.spec;
     }),
       M({ en: I }),
-      N("OPERATORS_MATHOP", "SENSING_OF", function (e, t) {
+      x("OPERATORS_MATHOP", "SENSING_OF", function (e, t) {
         var s = e[0];
         if (s.isInput) {
-          var r = s.value;
-          return t.math.includes(r);
+          var i = s.value;
+          return t.math.includes(i);
         }
       }),
-      N("SOUND_CHANGEEFFECTBY", "LOOKS_CHANGEEFFECTBY", function (e, t) {
+      x("SOUND_CHANGEEFFECTBY", "LOOKS_CHANGEEFFECTBY", function (e, t) {
         var s,
-          r = l(e);
+          i = l(e);
         try {
-          for (r.s(); !(s = r.n()).done; ) {
-            var i = s.value;
-            if ("dropdown" === i.shape) {
+          for (i.s(); !(s = i.n()).done; ) {
+            var r = s.value;
+            if ("dropdown" === r.shape) {
               var n,
-                o = i.value,
+                o = r.value,
                 a = l(t.soundEffects);
               try {
                 for (a.s(); !(n = a.n()).done; ) {
@@ -2132,21 +2133,21 @@
             }
           }
         } catch (e) {
-          r.e(e);
+          i.e(e);
         } finally {
-          r.f();
+          i.f();
         }
         return !1;
       }),
-      N("SOUND_SETEFFECTO", "LOOKS_SETEFFECTTO", function (e, t) {
+      x("SOUND_SETEFFECTO", "LOOKS_SETEFFECTTO", function (e, t) {
         var s,
-          r = l(e);
+          i = l(e);
         try {
-          for (r.s(); !(s = r.n()).done; ) {
-            var i = s.value;
-            if ("dropdown" === i.shape) {
+          for (i.s(); !(s = i.n()).done; ) {
+            var r = s.value;
+            if ("dropdown" === r.shape) {
               var n,
-                o = i.value,
+                o = r.value,
                 a = l(t.soundEffects);
               try {
                 for (a.s(); !(n = a.n()).done; ) {
@@ -2160,33 +2161,33 @@
             }
           }
         } catch (e) {
-          r.e(e);
+          i.e(e);
         } finally {
-          r.f();
+          i.f();
         }
         return !1;
       }),
-      N("DATA_LENGTHOFLIST", "OPERATORS_LENGTH", function (e, t) {
+      x("DATA_LENGTHOFLIST", "OPERATORS_LENGTH", function (e, t) {
         var s = e[e.length - 1];
         if (s.isInput) return "dropdown" === s.shape;
       }),
-      N("DATA_LISTCONTAINSITEM", "OPERATORS_CONTAINS", function (e, t) {
+      x("DATA_LISTCONTAINSITEM", "OPERATORS_CONTAINS", function (e, t) {
         var s = e[0];
         if (s.isInput) return "dropdown" === s.shape;
       }),
-      N("pen.setColor", "pen.setHue", function (e, t) {
+      x("pen.setColor", "pen.setHue", function (e, t) {
         var s = e[e.length - 1];
         return (s.isInput && s.isColor) || s.isBlock;
       }),
-      N("microbit.whenGesture", "gdxfor.whenGesture", function (e, t) {
+      x("microbit.whenGesture", "gdxfor.whenGesture", function (e, t) {
         var s,
-          r = l(e);
+          i = l(e);
         try {
-          for (r.s(); !(s = r.n()).done; ) {
-            var i = s.value;
-            if ("dropdown" === i.shape) {
+          for (i.s(); !(s = i.n()).done; ) {
+            var r = s.value;
+            if ("dropdown" === r.shape) {
               var n,
-                o = i.value,
+                o = r.value,
                 a = l(t.microbitWhen);
               try {
                 for (a.s(); !(n = a.n()).done; ) {
@@ -2200,20 +2201,20 @@
             }
           }
         } catch (e) {
-          r.e(e);
+          i.e(e);
         } finally {
-          r.f();
+          i.f();
         }
         return !1;
       }),
-      N("ev3.buttonPressed", "microbit.isButtonPressed", function (e, t) {
+      x("ev3.buttonPressed", "microbit.isButtonPressed", function (e, t) {
         var s,
-          r = l(e);
+          i = l(e);
         try {
-          for (r.s(); !(s = r.n()).done; ) {
-            var i = s.value;
-            if ("dropdown" === i.shape)
-              switch (L(i.value)) {
+          for (i.s(); !(s = i.n()).done; ) {
+            var r = s.value;
+            if ("dropdown" === r.shape)
+              switch (L(r.value)) {
                 case "1":
                 case "2":
                 case "3":
@@ -2222,20 +2223,20 @@
               }
           }
         } catch (e) {
-          r.e(e);
+          i.e(e);
         } finally {
-          r.f();
+          i.f();
         }
         return !1;
       }),
       (function (e, t) {
         if (!E[e]) throw Error("Unknown ID: " + e);
         E[e].specialCase = t;
-      })("CONTROL_STOP", function (e, s, r) {
-        var i = s[s.length - 1];
-        if (i.isInput) {
-          var n = i.value;
-          return r.osis.includes(n)
+      })("CONTROL_STOP", function (e, s, i) {
+        var r = s[s.length - 1];
+        if (r.isInput) {
+          var n = r.value;
+          return i.osis.includes(n)
             ? t(t({}, E.CONTROL_STOP), {}, { shape: "stack" })
             : void 0;
         }
@@ -2250,7 +2251,7 @@
             (this.x = 0);
         }
         return (
-          r(e, [
+          i(e, [
             {
               key: "isLabel",
               get: function () {
@@ -2276,7 +2277,7 @@
             D(e.icons[t], "no info for icon " + t);
         }
         return (
-          r(
+          i(
             e,
             [
               {
@@ -2336,7 +2337,7 @@
             (this.x = 0);
         }
         return (
-          r(e, [
+          i(e, [
             {
               key: "isInput",
               get: function () {
@@ -2380,28 +2381,28 @@
         );
       })(),
       H = (function () {
-        function e(e, s, r) {
+        function e(e, s, i) {
           D(e),
             (this.info = t({}, e)),
             (this.children = s),
-            (this.comment = r || null),
+            (this.comment = i || null),
             (this.diff = null);
-          var i = this.info.shape;
-          (this.isHat = "hat" === i || "cat" === i || "define-hat" === i),
+          var r = this.info.shape;
+          (this.isHat = "hat" === r || "cat" === r || "define-hat" === r),
             (this.hasPuzzle =
-              "stack" === i || "hat" === i || "cat" === i || "c-block" === i),
-            (this.isFinal = /cap/.test(i)),
-            (this.isCommand = "stack" === i || "cap" === i || /block/.test(i)),
-            (this.isOutline = "outline" === i),
-            (this.isReporter = "reporter" === i),
-            (this.isBoolean = "boolean" === i),
-            (this.isRing = "ring" === i),
-            (this.hasScript = /block/.test(i)),
-            (this.isElse = "celse" === i),
-            (this.isEnd = "cend" === i);
+              "stack" === r || "hat" === r || "cat" === r || "c-block" === r),
+            (this.isFinal = /cap/.test(r)),
+            (this.isCommand = "stack" === r || "cap" === r || /block/.test(r)),
+            (this.isOutline = "outline" === r),
+            (this.isReporter = "reporter" === r),
+            (this.isBoolean = "boolean" === r),
+            (this.isRing = "ring" === r),
+            (this.hasScript = /block/.test(r)),
+            (this.isElse = "celse" === r),
+            (this.isEnd = "cend" === r);
         }
         return (
-          r(e, [
+          i(e, [
             {
               key: "isBlock",
               get: function () {
@@ -2413,7 +2414,7 @@
               value: function (e) {
                 var t = null,
                   s = !1,
-                  r = this.children
+                  i = this.children
                     .map(function (e) {
                       return (
                         e.isIcon && (s = !0),
@@ -2434,9 +2435,9 @@
                     })
                     .join("")
                     .trim(),
-                  i = this.info.language;
-                if (s && i && this.info.selector) {
-                  var n = i.nativeAliases[this.info.id];
+                  r = this.info.language;
+                if (s && r && this.info.selector) {
+                  var n = r.nativeAliases[this.info.id];
                   if (n && n.length) {
                     var o = n[0];
                     return (
@@ -2452,14 +2453,14 @@
                     ("custom" === this.info.category &&
                       "stack" === this.info.shape)) &&
                     (a && (a += " "), (a += this.info.category)),
-                  a && (r += " :: " + a),
+                  a && (i += " :: " + a),
                   this.hasScript
-                    ? r + "\nend"
+                    ? i + "\nend"
                     : "reporter" === this.info.shape
-                      ? "(" + r + ")"
+                      ? "(" + i + ")"
                       : "boolean" === this.info.shape
-                        ? "<" + r + ">"
-                        : r
+                        ? "<" + i + ">"
+                        : i
                 );
               },
             },
@@ -2468,11 +2469,11 @@
               value: function (e, t) {
                 var s = this;
                 if (!e) throw Error("Missing language");
-                var r = this.info.id;
-                if (r)
-                  if ("PROCEDURES_DEFINITION" !== r) {
-                    var i = this.info.language.commands[r],
-                      n = e.commands[r];
+                var i = this.info.id;
+                if (i)
+                  if ("PROCEDURES_DEFINITION" !== i) {
+                    var r = this.info.language.commands[i],
+                      n = e.commands[i];
                     if (n) {
                       var o = O(n),
                         a = this.children.filter(function (e) {
@@ -2482,7 +2483,7 @@
                         a.forEach(function (t) {
                           return t.translate(e);
                         });
-                      var c = O(i)
+                      var c = O(r)
                           .parts.map(function (e) {
                             return w(e);
                           })
@@ -2508,8 +2509,8 @@
                         .filter(function (e) {
                           return e;
                         })),
-                        u.forEach(function (t, r) {
-                          1 === r &&
+                        u.forEach(function (t, i) {
+                          1 === i &&
                             "CONTROL_IF" === s.info.id &&
                             s.children.push(new P(e.commands.CONTROL_ELSE)),
                             s.children.push(t);
@@ -2540,8 +2541,8 @@
                       b = l(e.defineSuffix);
                     try {
                       for (b.s(); !(v = b.n()).done; ) {
-                        var A = v.value;
-                        this.children.push(new P(A));
+                        var k = v.value;
+                        this.children.push(new P(k));
                       }
                     } catch (e) {
                       b.e(e);
@@ -2562,7 +2563,7 @@
             (this.hasBlock = t);
         }
         return (
-          r(e, [
+          i(e, [
             {
               key: "isComment",
               get: function () {
@@ -2588,7 +2589,7 @@
               : (this.shape = "stack");
         }
         return (
-          r(e, [
+          i(e, [
             {
               key: "isGlow",
               get: function () {
@@ -2626,7 +2627,7 @@
             (this.isFinal = !this.isEmpty && e[e.length - 1].isFinal);
         }
         return (
-          r(e, [
+          i(e, [
             {
               key: "isScript",
               get: function () {
@@ -2661,7 +2662,7 @@
           this.scripts = e;
         }
         return (
-          r(e, [
+          i(e, [
             {
               key: "stringify",
               value: function () {
@@ -2685,14 +2686,14 @@
         );
       })();
     function _(e, t, s) {
-      var r = [];
-      Array.isArray(t[t.length - 1]) && (r = t.pop());
-      var i,
+      var i = [];
+      Array.isArray(t[t.length - 1]) && (i = t.pop());
+      var r,
         n = [],
         o = l(t);
       try {
-        for (o.s(); !(i = o.n()).done; ) {
-          var a = i.value;
+        for (o.s(); !(r = o.n()).done; ) {
+          var a = r.value;
           a.isLabel
             ? n.push(a.value)
             : a.isIcon
@@ -2707,12 +2708,12 @@
       var c,
         h,
         p = n.join(" "),
-        u = (function (e, t, s, r) {
-          var i,
-            n = l(r);
+        u = (function (e, t, s, i) {
+          var r,
+            n = l(i);
           try {
-            for (n.s(); !(i = n.n()).done; ) {
-              var o = i.value;
+            for (n.s(); !(r = n.n()).done; ) {
+              var o = r.value;
               if (Object.prototype.hasOwnProperty.call(o.blocksByHash, e)) {
                 var a,
                   c = o.blocksByHash[e],
@@ -2806,7 +2807,7 @@
                     }
                     return e;
                   }),
-                A = new H(
+                k = new H(
                   {
                     shape: "outline",
                     category: "custom",
@@ -2815,7 +2816,7 @@
                   },
                   b,
                 );
-              t.splice(v.definePrefix.length, 0, A);
+              t.splice(v.definePrefix.length, 0, k);
               break;
             }
           }
@@ -2827,26 +2828,26 @@
       }
       !(function (e, t) {
         var s,
-          r = l(t);
+          i = l(t);
         try {
-          for (r.s(); !(s = r.n()).done; ) {
-            var i = s.value;
-            k.test(i)
-              ? ((e.color = i), (e.category = ""), (e.categoryIsDefault = !1))
-              : d.includes(i)
-                ? ((e.category = i), (e.categoryIsDefault = !1))
-                : g.includes(i)
-                  ? (e.shape = i)
-                  : "loop" === i
+          for (i.s(); !(s = i.n()).done; ) {
+            var r = s.value;
+            A.test(r)
+              ? ((e.color = r), (e.category = ""), (e.categoryIsDefault = !1))
+              : d.includes(r)
+                ? ((e.category = r), (e.categoryIsDefault = !1))
+                : g.includes(r)
+                  ? (e.shape = r)
+                  : "loop" === r
                     ? (e.hasLoopArrow = !0)
-                    : ("+" !== i && "-" !== i) || (e.diff = i);
+                    : ("+" !== r && "-" !== r) || (e.diff = r);
           }
         } catch (e) {
-          r.e(e);
+          i.e(e);
         } finally {
-          r.f();
+          i.f();
         }
-      })(e, r),
+      })(e, i),
         e.hasLoopArrow && t.push(new F("loopArrow"));
       var w = new H(e, t);
       return (
@@ -2858,9 +2859,9 @@
       if (e.length < t.definePrefix.length) return !1;
       if (e.length < t.defineSuffix.length) return !1;
       for (var s = 0; s < t.definePrefix.length; s++) {
-        var r = t.definePrefix[s],
-          i = e[s];
-        if (!i.isLabel || L(i.value) !== L(r)) return !1;
+        var i = t.definePrefix[s],
+          r = e[s];
+        if (!r.isLabel || L(r.value) !== L(i)) return !1;
       }
       for (var n = 1; n <= t.defineSuffix.length; n++) {
         var o = t.defineSuffix[t.defineSuffix.length - n],
@@ -2871,26 +2872,26 @@
     }
     function Q(e, t) {
       var s,
-        r = e[0],
-        i = 0;
+        i = e[0],
+        r = 0;
       function n() {
-        r = e[++i];
+        i = e[++r];
       }
       function o() {
-        return e[i + 1];
+        return e[r + 1];
       }
       function a() {
-        for (var t = i + 1; t < e.length; t++) if (" " !== e[t]) return e[t];
+        for (var t = r + 1; t < e.length; t++) if (" " !== e[t]) return e[t];
       }
       var c = [];
       function h(e, s) {
-        var r = s.filter(function (e) {
+        var i = s.filter(function (e) {
           return !e.isLabel;
         }).length;
         return _(
           {
             shape: e,
-            category: "reporter" !== e || r ? "obsolete" : "variables",
+            category: "reporter" !== e || i ? "obsolete" : "variables",
             categoryIsDefault: !0,
             hasLoopArrow: !1,
           },
@@ -2899,41 +2900,41 @@
         );
       }
       function p(e, s) {
-        var r =
+        var i =
           (function (e, t) {
             var s,
-              r = l(t);
+              i = l(t);
             try {
-              for (r.s(); !(s = r.n()).done; ) {
-                var i = s.value;
-                if (Object.prototype.hasOwnProperty.call(i.nativeDropdowns, e))
-                  return i.nativeDropdowns[e];
+              for (i.s(); !(s = i.n()).done; ) {
+                var r = s.value;
+                if (Object.prototype.hasOwnProperty.call(r.nativeDropdowns, e))
+                  return r.nativeDropdowns[e];
               }
             } catch (e) {
-              r.e(e);
+              i.e(e);
             } finally {
-              r.f();
+              i.f();
             }
           })(s, t) || s;
-        return new z(e, s, r);
+        return new z(e, s, i);
       }
       function u(e) {
-        for (var t, s = []; r && "\n" !== r; ) {
+        for (var t, s = []; i && "\n" !== i; ) {
           if (
-            ("<" === r || ">" === r) &&
+            ("<" === i || ">" === i) &&
             ">" === e &&
             1 === s.length &&
             !s[s.length - 1].isLabel
           ) {
-            var i = a();
-            if ("[" === i || "(" === i || "<" === i || "{" === i) {
-              (t = null), s.push(new P(r)), n();
+            var r = a();
+            if ("[" === r || "(" === r || "<" === r || "{" === r) {
+              (t = null), s.push(new P(i)), n();
               continue;
             }
           }
-          if (r === e) break;
-          if ("/" === r && "/" === o() && !e) break;
-          switch (r) {
+          if (i === e) break;
+          if ("/" === i && "/" === o() && !e) break;
+          switch (i) {
             case "[":
               (t = null), s.push(f());
               break;
@@ -2956,7 +2957,7 @@
               break;
             case "@":
               n();
-              for (var c = ""; r && /[a-zA-Z]/.test(r); ) (c += r), n();
+              for (var c = ""; i && /[a-zA-Z]/.test(i); ) (c += i), n();
               "cloud" === c
                 ? s.push(new P("☁"))
                 : s.push(
@@ -2969,24 +2970,24 @@
             case "\\":
               n();
             case ":":
-              if (":" === r && ":" === o()) return s.push(b(e)), s;
+              if (":" === i && ":" === o()) return s.push(b(e)), s;
             default:
-              t || s.push((t = new P(""))), (t.value += r), n();
+              t || s.push((t = new P(""))), (t.value += i), n();
           }
         }
         return s;
       }
       function f() {
         n();
-        for (var e = "", t = !1; r && "]" !== r && "\n" !== r; ) {
-          if ("\\" === r) {
-            if ((n(), "v" === r && (t = !0), !r)) break;
+        for (var e = "", t = !1; i && "]" !== i && "\n" !== i; ) {
+          if ("\\" === i) {
+            if ((n(), "v" === i && (t = !0), !i)) break;
           } else t = !1;
-          (e += r), n();
+          (e += i), n();
         }
         return (
-          "]" === r && n(),
-          k.test(e)
+          "]" === i && n(),
+          A.test(e)
             ? new z("color", e)
             : !t && / v$/.test(e)
               ? p("dropdown", e.slice(0, e.length - 2))
@@ -2995,24 +2996,24 @@
       }
       function d(e) {
         var t = u(e);
-        if ((r && "\n" === r && ((s = !0), n()), 0 !== t.length)) {
+        if ((i && "\n" === i && ((s = !0), n()), 0 !== t.length)) {
           if (1 === t.length) {
-            var i = t[0];
-            if (i.isBlock && (i.isReporter || i.isBoolean || i.isRing))
-              return i;
+            var r = t[0];
+            if (r.isBlock && (r.isReporter || r.isBoolean || r.isRing))
+              return r;
           }
           return h("stack", t);
         }
       }
       function g() {
-        if ((n(), " " === r && (n(), "v" === r && ")" === o())))
+        if ((n(), " " === i && (n(), "v" === i && ")" === o())))
           return n(), n(), new z("number-dropdown", "");
         var e = u(")");
-        if ((r && ")" === r && n(), 0 === e.length)) return new z("number", "");
+        if ((i && ")" === i && n(), 0 === e.length)) return new z("number", "");
         if (1 === e.length && e[0].isLabel) {
           var t = e[0].value;
           if (/^[0-9e.-]*$/.test(t)) return new z("number", t);
-          if (k.test(t)) return new z("color", t);
+          if (A.test(t)) return new z("color", t);
         }
         if (
           e.length > 1 &&
@@ -3034,11 +3035,11 @@
           );
         var s = h("reporter", e);
         if (s.info && "ring" === s.info.shape) {
-          var i = s.children[0];
-          i && i.isInput && "number" === i.shape && "" === i.value
+          var r = s.children[0];
+          r && r.isInput && "number" === r.shape && "" === r.value
             ? (s.children[0] = new z("reporter"))
-            : ((i && i.isScript && i.isEmpty) ||
-                (i && i.isBlock && !i.children.length)) &&
+            : ((r && r.isScript && r.isEmpty) ||
+                (r && r.isBlock && !r.children.length)) &&
               (s.children[0] = new z("stack"));
         }
         return s;
@@ -3047,14 +3048,14 @@
         n();
         var e = u(">");
         return (
-          r && ">" === r && n(),
+          i && ">" === i && n(),
           0 === e.length ? new z("boolean") : h("boolean", e)
         );
       }
       function y() {
         n(), (s = !1);
         var e = Z(function () {
-            for (; r && "}" !== r; ) {
+            for (; i && "}" !== i; ) {
               var e = d("}");
               if (e) return e;
             }
@@ -3064,7 +3065,7 @@
           e.forEach(function (e) {
             t = t.concat(e.blocks);
           }),
-          "}" === r && n(),
+          "}" === i && n(),
           s
             ? new j(t)
             : ((function (e, t) {
@@ -3074,7 +3075,7 @@
         );
       }
       function v() {
-        var e = r;
+        var e = i;
         switch ((n(), e)) {
           case "▸":
             return new F("addInput");
@@ -3086,11 +3087,11 @@
       }
       function b(e) {
         n(), n();
-        for (var t = [], s = ""; r && "\n" !== r && r !== e; ) {
-          if (" " === r) s && (t.push(s), (s = ""));
+        for (var t = [], s = ""; i && "\n" !== i && i !== e; ) {
+          if (" " === i) s && (t.push(s), (s = ""));
           else {
-            if ("/" === r && "/" === o()) break;
-            s += r;
+            if ("/" === i && "/" === o()) break;
+            s += i;
           }
           n();
         }
@@ -3098,13 +3099,13 @@
       }
       function m() {
         var e;
-        ("+" !== r && "-" !== r) || ((e = r), n());
+        ("+" !== i && "-" !== i) || ((e = i), n());
         var t = d();
-        if ("/" === r && "/" === o()) {
+        if ("/" === i && "/" === o()) {
           var s = (function (e) {
             n(), n();
-            for (var t = ""; r && "\n" !== r && r !== e; ) (t += r), n();
-            return r && "\n" === r && n(), new G(t, !0);
+            for (var t = ""; i && "\n" !== i && i !== e; ) (t += i), n();
+            return i && "\n" === i && n(), new G(t, !0);
           })();
           if (((s.hasBlock = t && t.children.length), !s.hasBlock)) return s;
           t.comment = s;
@@ -3116,29 +3117,29 @@
           c = c.concat(e.define);
         }),
         function () {
-          if (r) return m() || "NL";
+          if (i) return m() || "NL";
         }
       );
     }
     function Z(e) {
       var s = e();
-      function r() {
+      function i() {
         s = e();
       }
-      function i() {
+      function r() {
         var e = s;
-        if ((r(), e.hasScript))
+        if ((i(), e.hasScript))
           for (;;) {
             var t = n();
             if ((e.children.push(new j(t)), !s || !s.isElse)) {
-              s && s.isEnd && r();
+              s && s.isEnd && i();
               break;
             }
-            var i,
+            var r,
               o = l(s.children);
             try {
-              for (o.s(); !(i = o.n()).done; ) {
-                var a = i.value;
+              for (o.s(); !(r = o.n()).done; ) {
+                var a = r.value;
                 e.children.push(a);
               }
             } catch (e) {
@@ -3146,7 +3147,7 @@
             } finally {
               o.f();
             }
-            r();
+            i();
           }
         return e;
       }
@@ -3154,7 +3155,7 @@
         for (var e = []; s; )
           if ("NL" !== s) {
             if (!s.isCommand) return e;
-            var t = i(),
+            var t = r(),
               n = "+" === t.diff;
             if ((n && (t.diff = null), n)) {
               var o = e[e.length - 1],
@@ -3165,14 +3166,14 @@
                 a.push(t),
                 e.push(new U(new j(a)));
             } else e.push(t);
-          } else r();
+          } else i();
         return e;
       }
       return (function () {
-        for (; "NL" === s; ) r();
+        for (; "NL" === s; ) i();
         for (var e = []; s; ) {
           for (var n = []; s && "NL" !== s; ) {
-            var o = i(),
+            var o = r(),
               a = "+" === o.diff;
             if (
               (a && (o.diff = null),
@@ -3203,7 +3204,7 @@
               n.push(o);
             }
           }
-          for (n.length && e.push(new j(n)); "NL" === s; ) r();
+          for (n.length && e.push(new j(n)); "NL" === s; ) i();
         }
         return e;
       })();
@@ -3234,29 +3235,29 @@
         throw Error("Option 'dialect' no longer supported");
       (e = (e = e.replace(/&lt;/g, "<")).replace(/&gt;/g, ">")),
         s.inline && (e = e.replace(/\n/g, " "));
-      var r = s.languages.map(function (e) {
+      var i = s.languages.map(function (e) {
           var t = C[e];
           if (!t) throw Error("Unknown language: '" + e + "'");
           return t;
         }),
-        i = Z(Q(e, r));
+        r = Z(Q(e, i));
       return (
         (function (e) {
           var t = Object.create(null),
             s = new Set();
           e.forEach(function (e) {
-            var r = new Set();
+            var i = new Set();
             X(e, function (e) {
               if (e.isBlock)
                 if ("define-hat" === e.info.shape) {
-                  var i = e.children.find(function (e) {
+                  var r = e.children.find(function (e) {
                     return e.isOutline;
                   });
-                  if (!i) return;
+                  if (!r) return;
                   var n,
                     o = [],
                     a = [],
-                    c = l(i.children);
+                    c = l(r.children);
                   try {
                     for (c.s(); !(n = c.n()).done; ) {
                       var h = n.value;
@@ -3269,7 +3270,7 @@
                           ],
                         );
                         var p = B(h);
-                        o.push(p), r.add(p);
+                        o.push(p), i.add(p);
                       }
                     }
                   } catch (e) {
@@ -3291,7 +3292,7 @@
                   (e.isReporter || e.isBoolean)
                 ) {
                   var g = B(e);
-                  r.has(g) &&
+                  i.has(g) &&
                     ((e.info.category = "custom-arg"),
                     (e.info.categoryIsDefault = !1),
                     (e.info.selector = "getParam"));
@@ -3314,30 +3315,30 @@
                   e.info.categoryIsDefault &&
                   "obsolete" === e.info.category
                 ) {
-                  var r = t[e.info.hash];
-                  r &&
+                  var i = t[e.info.hash];
+                  i &&
                     ((e.info.selector = "call"),
-                    (e.info.call = r.spec),
-                    (e.info.names = r.names),
+                    (e.info.call = i.spec),
+                    (e.info.names = i.names),
                     (e.info.category = "custom"));
                 } else {
-                  var i, n;
+                  var r, n;
                   e.isReporter &&
                     "variables" === e.info.category &&
                     e.info.categoryIsDefault &&
                     ((e.info.selector = "readVariable"),
-                    (i = B(e)),
+                    (r = B(e)),
                     (n = e.info)),
-                    i &&
-                      s.has(i) &&
+                    r &&
+                      s.has(r) &&
                       ((n.category = "list"),
                       (n.categoryIsDefault = !1),
                       (n.selector = "contentsOfList:"));
                 }
               });
             });
-        })(i),
-        new K(i)
+        })(r),
+        new K(r)
       );
     }
     function ee(e, t) {
@@ -3347,7 +3348,7 @@
       se = (function () {
         function e() {}
         return (
-          r(e, null, [
+          i(e, null, [
             {
               key: "init",
               value: function (t) {
@@ -3372,20 +3373,20 @@
             {
               key: "el",
               value: function (t, s) {
-                var r = Y.createElementNS("http://www.w3.org/2000/svg", t);
-                return e.setProps(r, s);
+                var i = Y.createElementNS("http://www.w3.org/2000/svg", t);
+                return e.setProps(i, s);
               },
             },
             {
               key: "setProps",
               value: function (e, t) {
                 for (var s in t) {
-                  var r = t[s] + "";
+                  var i = t[s] + "";
                   te[s]
-                    ? (e[s] = r)
+                    ? (e[s] = i)
                     : null != t[s] &&
                       Object.prototype.hasOwnProperty.call(t, s) &&
-                      e.setAttributeNS(null, s, r);
+                      e.setAttributeNS(null, s, i);
                 }
                 return e;
               },
@@ -3394,16 +3395,16 @@
               key: "withChildren",
               value: function (e, t) {
                 var s,
-                  r = l(t);
+                  i = l(t);
                 try {
-                  for (r.s(); !(s = r.n()).done; ) {
-                    var i = s.value;
-                    e.appendChild(i);
+                  for (i.s(); !(s = i.n()).done; ) {
+                    var r = s.value;
+                    e.appendChild(r);
                   }
                 } catch (e) {
-                  r.e(e);
+                  i.e(e);
                 } finally {
-                  r.f();
+                  i.f();
                 }
                 return e;
               },
@@ -3416,11 +3417,11 @@
             },
             {
               key: "newSVG",
-              value: function (t, s, r) {
+              value: function (t, s, i) {
                 return e.el("svg", {
                   version: "1.1",
-                  width: t * r,
-                  height: s * r,
+                  width: t * i,
+                  height: s * i,
                   viewBox: "0 0 " + t + " " + s,
                 });
               },
@@ -3445,10 +3446,10 @@
             },
             {
               key: "text",
-              value: function (s, r, i, n) {
+              value: function (s, i, r, n) {
                 var o = e.el(
                   "text",
-                  t(t({}, n), {}, { x: s, y: r, textContent: i }),
+                  t(t({}, n), {}, { x: s, y: i, textContent: r }),
                 );
                 return o;
               },
@@ -3461,12 +3462,12 @@
             },
             {
               key: "move",
-              value: function (t, s, r) {
+              value: function (t, s, i) {
                 return (
-                  e.setProps(r, {
+                  e.setProps(i, {
                     transform: "translate(" + t + " " + s + ")",
                   }),
-                  r
+                  i
                 );
               },
             },
@@ -3474,19 +3475,19 @@
               key: "translatePath",
               value: function (e, t, s) {
                 for (
-                  var r = !0, i = s.split(/\s+/), n = [], o = 0;
-                  o < i.length;
+                  var i = !0, r = s.split(/\s+/), n = [], o = 0;
+                  o < r.length;
                   o++
                 ) {
-                  var a = i[o];
+                  var a = r[o];
                   if ("A" !== a)
                     /[A-Za-z]/.test(a)
-                      ? ee(r, "translatePath: invalid argument")
-                      : ((a = +a), (a += r ? e : t), (r = !r)),
+                      ? ee(i, "translatePath: invalid argument")
+                      : ((a = +a), (a += i ? e : t), (i = !i)),
                       n.push(a);
                   else {
                     var c = o + 5;
-                    for (n.push("A"); o < c; ) n.push(i[++o]);
+                    for (n.push("A"); o < c; ) n.push(r[++o]);
                   }
                 }
                 return n.join(" ");
@@ -3494,82 +3495,82 @@
             },
             {
               key: "rect",
-              value: function (s, r, i) {
+              value: function (s, i, r) {
                 return e.el(
                   "rect",
-                  t(t({}, i), {}, { x: 0, y: 0, width: s, height: r }),
+                  t(t({}, r), {}, { x: 0, y: 0, width: s, height: i }),
                 );
               },
             },
             {
               key: "ellipse",
-              value: function (s, r, i) {
+              value: function (s, i, r) {
                 return e.el(
                   "ellipse",
                   t(
-                    t({}, i),
+                    t({}, r),
                     {},
-                    { cx: s / 2, cy: r / 2, rx: s / 2, ry: r / 2 },
+                    { cx: s / 2, cy: i / 2, rx: s / 2, ry: i / 2 },
                   ),
                 );
               },
             },
             {
               key: "arc",
-              value: function (e, t, s, r, i, n) {
+              value: function (e, t, s, i, r, n) {
                 return (
                   "L " +
                   e +
                   " " +
                   t +
                   " A " +
-                  i +
+                  r +
                   " " +
                   n +
                   " 0 0 1 " +
                   s +
                   " " +
-                  r
+                  i
                 );
               },
             },
             {
               key: "arcw",
-              value: function (e, t, s, r, i, n) {
+              value: function (e, t, s, i, r, n) {
                 return (
                   "L " +
                   e +
                   " " +
                   t +
                   " A " +
-                  i +
+                  r +
                   " " +
                   n +
                   " 0 0 0 " +
                   s +
                   " " +
-                  r
+                  i
                 );
               },
             },
             {
               key: "roundedPath",
               value: function (t, s) {
-                var r = s / 2;
+                var i = s / 2;
                 return [
                   "M",
-                  r,
+                  i,
                   0,
-                  e.arc(t - r, 0, t - r, s, r, r),
-                  e.arc(r, s, r, 0, r, r),
+                  e.arc(t - i, 0, t - i, s, i, i),
+                  e.arc(i, s, i, 0, i, i),
                   "Z",
                 ];
               },
             },
             {
               key: "roundedRect",
-              value: function (s, r, i) {
-                return e.path(t(t({}, i), {}, { path: e.roundedPath(s, r) }));
+              value: function (s, i, r) {
+                return e.path(t(t({}, r), {}, { path: e.roundedPath(s, i) }));
               },
             },
             {
@@ -3606,8 +3607,8 @@
             },
             {
               key: "pointedRect",
-              value: function (s, r, i) {
-                return e.path(t(t({}, i), {}, { path: e.pointedPath(s, r) }));
+              value: function (s, i, r) {
+                return e.path(t(t({}, r), {}, { path: e.pointedPath(s, i) }));
               },
             },
             {
@@ -3636,29 +3637,29 @@
             },
             {
               key: "getRightAndBottom",
-              value: function (e, t, s, r) {
-                void 0 === r && (r = 0);
-                var i = ["L", e, t - 3, "L", e - 3, t];
+              value: function (e, t, s, i) {
+                void 0 === i && (i = 0);
+                var r = ["L", e, t - 3, "L", e - 3, t];
                 return (
                   s &&
-                    (i = i.concat([
+                    (r = r.concat([
                       "L",
-                      r + 27,
+                      i + 27,
                       t,
                       "L",
-                      r + 24,
+                      i + 24,
                       t + 3,
                       "L",
-                      r + 16,
+                      i + 16,
                       t + 3,
                       "L",
-                      r + 13,
+                      i + 13,
                       t,
                     ])),
-                  (i =
-                    r > 0
-                      ? i.concat(["L", r + 2, t, "L", r, t + 2])
-                      : i.concat(["L", r + 3, t, "L", 0, t - 3])).join(" ")
+                  (r =
+                    i > 0
+                      ? r.concat(["L", i + 2, t, "L", i, t + 2])
+                      : r.concat(["L", i + 3, t, "L", 0, t - 3])).join(" ")
                 );
               },
             },
@@ -3683,15 +3684,15 @@
             },
             {
               key: "stackRect",
-              value: function (s, r, i) {
+              value: function (s, i, r) {
                 return e.path(
                   t(
-                    t({}, i),
+                    t({}, r),
                     {},
                     {
                       path: [
                         e.getTop(s),
-                        e.getRightAndBottom(s, r, !0, 0),
+                        e.getRightAndBottom(s, i, !0, 0),
                         "Z",
                       ],
                     },
@@ -3707,16 +3708,16 @@
             },
             {
               key: "capRect",
-              value: function (s, r, i) {
-                return e.path(t(t({}, i), {}, { path: e.capPath(s, r) }));
+              value: function (s, i, r) {
+                return e.path(t(t({}, r), {}, { path: e.capPath(s, i) }));
               },
             },
             {
               key: "hatRect",
-              value: function (s, r, i) {
+              value: function (s, i, r) {
                 return e.path(
                   t(
-                    t({}, i),
+                    t({}, r),
                     {},
                     {
                       path: [
@@ -3730,7 +3731,7 @@
                         "L",
                         s,
                         13,
-                        e.getRightAndBottom(s, r, !0),
+                        e.getRightAndBottom(s, i, !0),
                         "Z",
                       ],
                     },
@@ -3740,24 +3741,24 @@
             },
             {
               key: "curve",
-              value: function (e, t, s, r, i) {
-                var n = (t + r) / 2;
+              value: function (e, t, s, i, r) {
+                var n = (t + i) / 2;
                 return (
-                  Math.round((e + s) / 2 + (i = i || 0.42) * (r - t)) +
+                  Math.round((e + s) / 2 + (r = r || 0.42) * (i - t)) +
                   " " +
-                  Math.round(n - i * (s - e)) +
+                  Math.round(n - r * (s - e)) +
                   " " +
                   s +
                   " " +
-                  r
+                  i
                 );
               },
             },
             {
               key: "procHatBase",
-              value: function (s, r, i, n) {
+              value: function (s, i, r, n) {
                 return (
-                  (i = Math.min(0.2, 35 / s)),
+                  (r = Math.min(0.2, 35 / s)),
                   e.path(
                     t(
                       t({}, n),
@@ -3768,17 +3769,17 @@
                           0,
                           15,
                           "Q",
-                          e.curve(0, 15, s, 15, i),
-                          e.getRightAndBottom(s, r, !0),
+                          e.curve(0, 15, s, 15, r),
+                          e.getRightAndBottom(s, i, !0),
                           "M",
                           -1,
                           13,
                           "Q",
-                          e.curve(-1, 13, s + 1, 13, i),
+                          e.curve(-1, 13, s + 1, 13, r),
                           "Q",
                           e.curve(s + 1, 13, s, 16, 0.6),
                           "Q",
-                          e.curve(s, 16, 0, 16, -i),
+                          e.curve(s, 16, 0, 16, -r),
                           "Q",
                           e.curve(0, 16, -1, 13, 0.6),
                           "Z",
@@ -3791,18 +3792,18 @@
             },
             {
               key: "procHatCap",
-              value: function (t, s, r) {
+              value: function (t, s, i) {
                 return e.path({
                   path: [
                     "M",
                     -1,
                     13,
                     "Q",
-                    e.curve(-1, 13, t + 1, 13, r),
+                    e.curve(-1, 13, t + 1, 13, i),
                     "Q",
                     e.curve(t + 1, 13, t, 16, 0.6),
                     "Q",
-                    e.curve(t, 16, 0, 16, -r),
+                    e.curve(t, 16, 0, 16, -i),
                     "Q",
                     e.curve(0, 16, -1, 13, 0.6),
                     "Z",
@@ -3813,19 +3814,19 @@
             },
             {
               key: "procHatRect",
-              value: function (t, s, r) {
-                var i = s - 52,
+              value: function (t, s, i) {
+                var r = s - 52,
                   n = Math.min(0.2, 35 / t);
                 return e.move(
                   0,
-                  i,
-                  e.group([e.procHatBase(t, 52, n, r), e.procHatCap(t, 52, n)]),
+                  r,
+                  e.group([e.procHatBase(t, 52, n, i), e.procHatCap(t, 52, n)]),
                 );
               },
             },
             {
               key: "mouthRect",
-              value: function (s, r, i, n, o) {
+              value: function (s, i, r, n, o) {
                 for (
                   var a = n[0].height,
                     c = [e.getTop(s), e.getRightAndBottom(s, a, !0, 15)],
@@ -3835,7 +3836,7 @@
                 ) {
                   var h = l + 2 === n.length;
                   (a += n[l].height - 3), c.push(e.getArm(s, a));
-                  var p = !(h && i),
+                  var p = !(h && r),
                     u = h ? 0 : 15;
                   (a += n[l + 1].height + 3),
                     c.push(e.getRightAndBottom(s, a, p, u));
@@ -3845,7 +3846,7 @@
             },
             {
               key: "ringRect",
-              value: function (s, r, i, n, o, a, c) {
+              value: function (s, i, r, n, o, a, c) {
                 var l =
                   "reporter" === a
                     ? e.roundedPath
@@ -3862,11 +3863,11 @@
                         8,
                         0,
                         e.arcw(8, 0, 0, 8, 8, 8),
-                        e.arcw(0, r - 8, 8, r, 8, 8),
-                        e.arcw(s - 8, r, s, r - 8, 8, 8),
+                        e.arcw(0, i - 8, 8, i, 8, 8),
+                        e.arcw(s - 8, i, s, i - 8, 8, 8),
                         e.arcw(s, 8, s - 8, 0, 8, 8),
                         "Z",
-                        e.translatePath(4, i || 4, l(n, o).join(" ")),
+                        e.translatePath(4, r || 4, l(n, o).join(" ")),
                       ],
                       "fill-rule": "even-odd",
                     },
@@ -3876,10 +3877,10 @@
             },
             {
               key: "commentRect",
-              value: function (s, r, i) {
+              value: function (s, i, r) {
                 return e.path(
                   t(
-                    t({}, i),
+                    t({}, r),
                     {},
                     {
                       class: "sb-comment",
@@ -3888,8 +3889,8 @@
                         6,
                         0,
                         e.arc(s - 6, 0, s, 6, 6, 6),
-                        e.arc(s, r - 6, s - 6, r, 6, 6),
-                        e.arc(6, r, 0, r - 6, 6, 6),
+                        e.arc(s, i - 6, s - 6, i, 6, 6),
+                        e.arc(6, i, 0, i - 6, 6, 6),
                         e.arc(0, 6, 6, 0, 6, 6),
                         "Z",
                       ],
@@ -3900,20 +3901,20 @@
             },
             {
               key: "commentLine",
-              value: function (s, r) {
+              value: function (s, i) {
                 return e.move(
                   -s,
                   9,
-                  e.rect(s, 2, t(t({}, r), {}, { class: "sb-comment-line" })),
+                  e.rect(s, 2, t(t({}, i), {}, { class: "sb-comment-line" })),
                 );
               },
             },
             {
               key: "strikethroughLine",
-              value: function (s, r) {
+              value: function (s, i) {
                 return e.path(
                   t(
-                    t({}, r),
+                    t({}, i),
                     {},
                     {
                       path: ["M", 0, 0, "L", s, 0],
@@ -3927,7 +3928,7 @@
           e
         );
       })(),
-      re = (function () {
+      ie = (function () {
         function e(e, s) {
           (this.el = se.el(
             "filter",
@@ -3940,31 +3941,31 @@
             (this.highestId = 0);
         }
         return (
-          r(e, [
+          i(e, [
             {
               key: "fe",
-              value: function (e, s, r) {
-                var i =
+              value: function (e, s, i) {
+                var r =
                   e.toLowerCase().replace(/gaussian|osite/, "") +
                   "-" +
                   ++this.highestId;
                 return (
                   this.el.appendChild(
                     se.withChildren(
-                      se.el("fe" + e, t(t({}, s), {}, { result: i })),
-                      r || [],
+                      se.el("fe" + e, t(t({}, s), {}, { result: r })),
+                      i || [],
                     ),
                   ),
-                  i
+                  r
                 );
               },
             },
             {
               key: "comp",
-              value: function (e, s, r, i) {
+              value: function (e, s, i, r) {
                 return this.fe(
                   "Composite",
-                  t(t({}, i), {}, { operator: e, in: s, in2: r }),
+                  t(t({}, r), {}, { operator: e, in: s, in2: i }),
                 );
               },
             },
@@ -4025,10 +4026,10 @@
           e
         );
       })(),
-      ie = (function () {
+      re = (function () {
         function e() {}
         return (
-          r(e, null, [
+          i(e, null, [
             {
               key: "cssContent",
               get: function () {
@@ -4192,22 +4193,22 @@
             {
               key: "bevelFilter",
               value: function (e, t) {
-                var s = new re(e),
-                  r = "SourceAlpha",
-                  i = t ? -1 : 1,
-                  n = s.blur(1, r);
+                var s = new ie(e),
+                  i = "SourceAlpha",
+                  r = t ? -1 : 1,
+                  n = s.blur(1, i);
                 return (
                   s.merge([
                     "SourceGraphic",
                     s.comp(
                       "in",
                       s.flood("#fff", 0.15),
-                      s.subtract(r, s.offset(+i, +i, n)),
+                      s.subtract(i, s.offset(+r, +r, n)),
                     ),
                     s.comp(
                       "in",
                       s.flood("#000", 0.7),
-                      s.subtract(r, s.offset(-i, -i, n)),
+                      s.subtract(i, s.offset(-r, -r, n)),
                     ),
                   ]),
                   s.el
@@ -4217,7 +4218,7 @@
             {
               key: "darkFilter",
               value: function (e) {
-                var t = new re(e);
+                var t = new ie(e);
                 return (
                   t.merge([
                     "SourceGraphic",
@@ -4229,10 +4230,10 @@
             },
             {
               key: "darkRect",
-              value: function (e, t, s, r) {
+              value: function (e, t, s, i) {
                 return se.setProps(
                   se.group([
-                    se.setProps(r, { class: "sb-" + s + " sb-darker" }),
+                    se.setProps(i, { class: "sb-" + s + " sb-darker" }),
                   ]),
                   { width: e, height: t },
                 );
@@ -4248,12 +4249,12 @@
           e
         );
       })(),
-      ne = ie.defaultFontFamily,
-      oe = ie.makeStyle,
-      ae = ie.makeIcons,
-      ce = ie.darkRect,
-      le = ie.bevelFilter,
-      he = ie.darkFilter,
+      ne = re.defaultFontFamily,
+      oe = re.makeStyle,
+      ae = re.makeIcons,
+      ce = re.darkRect,
+      le = re.bevelFilter,
+      he = re.darkFilter,
       pe = (function () {
         function e(e) {
           n(this, e),
@@ -4263,7 +4264,7 @@
             (this.x = 0);
         }
         return (
-          r(
+          i(
             e,
             [
               {
@@ -4290,19 +4291,19 @@
                   var t = this.value,
                     s = "sb-" + this.cls;
                   this.el = se.text(0, 10, t, { class: "sb-label " + s });
-                  var r = e.metricsCache[s];
+                  var i = e.metricsCache[s];
                   if (
-                    (r || (r = e.metricsCache[s] = Object.create(null)),
-                    Object.hasOwnProperty.call(r, t))
+                    (i || (i = e.metricsCache[s] = Object.create(null)),
+                    Object.hasOwnProperty.call(i, t))
                   )
-                    this.metrics = r[t];
+                    this.metrics = i[t];
                   else {
-                    var i = /comment-label/.test(this.cls)
+                    var r = /comment-label/.test(this.cls)
                       ? "bold 12px Helvetica, Arial, DejaVu Sans, sans-serif"
                       : /literal/.test(this.cls)
                         ? "normal 9px " + ne
                         : "bold 10px " + ne;
-                    this.metrics = r[t] = e.measure(t, i);
+                    this.metrics = i[t] = e.measure(t, r);
                   }
                 },
               },
@@ -4311,9 +4312,9 @@
               {
                 key: "measure",
                 value: function (t, s) {
-                  var r = e.measuring;
+                  var i = e.measuring;
                   return (
-                    (r.font = s), { width: (r.measureText(t).width + 0.5) | 0 }
+                    (i.font = s), { width: (i.measureText(t).width + 0.5) | 0 }
                   );
                 },
               },
@@ -4331,7 +4332,7 @@
           n(this, s);
         }
         return (
-          r(
+          i(
             e,
             [
               {
@@ -4376,7 +4377,7 @@
           n(this, e), e.label && (this.label = be(e.label)), (this.x = 0);
         }
         return (
-          r(
+          i(
             e,
             [
               {
@@ -4388,9 +4389,9 @@
               {
                 key: "draw",
                 value: function (t) {
-                  var s, r;
+                  var s, i;
                   this.hasLabel
-                    ? ((r = this.label.draw()),
+                    ? ((i = this.label.draw()),
                       (s = Math.max(
                         14,
                         this.label.width +
@@ -4402,13 +4403,13 @@
                     : (s = this.isInset ? 30 : this.isColor ? 13 : null),
                     this.hasArrow && (s += 10),
                     (this.width = s);
-                  var i = (this.height =
+                  var r = (this.height =
                       this.isRound || this.isColor ? 13 : 14),
-                    n = e.shapes[this.shape](s, i);
+                    n = e.shapes[this.shape](s, r);
                   this.isColor
                     ? se.setProps(n, { fill: this.value })
                     : this.isDarker &&
-                      ((n = ce(s, i, t.info.category, n)),
+                      ((n = ce(s, r, t.info.category, n)),
                       t.info.color && se.setProps(n, { fill: t.info.color }));
                   var o = se.group([
                     se.setProps(n, {
@@ -4417,7 +4418,7 @@
                   ]);
                   if (this.hasLabel) {
                     var a = this.isRound ? 5 : 4;
-                    o.appendChild(se.move(a, 0, r));
+                    o.appendChild(se.move(a, 0, i));
                   }
                   if (this.hasArrow) {
                     var c = "dropdown" === this.shape ? 5 : 4;
@@ -4476,7 +4477,7 @@
             (this.innerWidth = null);
         }
         return (
-          r(
+          i(
             e,
             [
               {
@@ -4505,9 +4506,9 @@
               },
               {
                 key: "drawSelf",
-                value: function (t, s, r) {
-                  if (r.length > 1)
-                    return se.mouthRect(t, s, this.isFinal, r, {
+                value: function (t, s, i) {
+                  if (i.length > 1)
+                    return se.mouthRect(t, s, this.isFinal, i, {
                       class: "sb-" + this.info.category + " sb-bevel",
                     });
                   if ("outline" === this.info.shape)
@@ -4515,14 +4516,14 @@
                       class: "sb-outline",
                     });
                   if (this.isRing) {
-                    var i = this.children[0];
-                    if (i && (i.isStack || i.isBlock || i.isScript)) {
-                      var n = i.isScript
+                    var r = this.children[0];
+                    if (r && (r.isStack || r.isBlock || r.isScript)) {
+                      var n = r.isScript
                         ? "stack"
-                        : i.isStack
-                          ? i.shape
-                          : i.info.shape;
-                      return se.ringRect(t, s, i.y, i.width, i.height, n, {
+                        : r.isStack
+                          ? r.shape
+                          : r.info.shape;
+                      return se.ringRect(t, s, r.y, r.width, r.height, n, {
                         class: "sb-" + this.info.category + " sb-bevel",
                       });
                     }
@@ -4560,10 +4561,10 @@
                 value: function () {
                   var t = "define-hat" === this.info.shape,
                     s = this.children,
-                    r = e.padding[this.info.shape] || e.padding.null,
-                    i = r[0],
-                    n = r[1],
-                    o = r[2],
+                    i = e.padding[this.info.shape] || e.padding.null,
+                    r = i[0],
+                    n = i[1],
+                    o = i[2],
                     a = 0,
                     c = function (e) {
                       (this.y = e),
@@ -4576,7 +4577,7 @@
                     u = new c(a),
                     f = function (e) {
                       0 === y.length
-                        ? (u.height += i + o)
+                        ? (u.height += r + o)
                         : ((u.height += e ? 0 : 2), (u.y -= 1)),
                         (a += u.height),
                         y.push(u);
@@ -4608,16 +4609,16 @@
                     else if (b.isArrow) u.children.push(b);
                     else {
                       var m = v > 0 ? 30 : 0,
-                        A = this.isCommand ? 0 : this.minDistance(b),
-                        k = this.isCommand
+                        k = this.isCommand ? 0 : this.minDistance(b),
+                        A = this.isCommand
                           ? b.isBlock || b.isInput
                             ? m
                             : 0
-                          : A;
-                      k && !y.length && u.width < k - n && (u.width = k - n),
+                          : k;
+                      A && !y.length && u.width < A - n && (u.width = A - n),
                         (b.x = u.width),
                         (u.width += b.width),
-                        (h = Math.max(h, u.width + Math.max(0, A - n))),
+                        (h = Math.max(h, u.width + Math.max(0, k - n))),
                         (u.width += 4),
                         b.isLabel || (u.height = Math.max(u.height, b.height)),
                         u.children.push(b);
@@ -4638,7 +4639,7 @@
                     t)
                   ) {
                     var w = Math.min(26, (3.5 + 0.13 * h) | 0) - 18;
-                    (this.height += w), (i += 2 * w);
+                    (this.height += w), (r += 2 * w);
                   }
                   (this.firstLine = y[0]), (this.innerWidth = h);
                   for (var O = [], S = 0, L = y; S < L.length; S++) {
@@ -4654,7 +4655,7 @@
                           if (M.isArrow)
                             O.push(se.move(h - 15, this.height - 3, M.el));
                           else {
-                            var I = i + (R - M.height - i - o) / 2 - 1;
+                            var I = r + (R - M.height - r - o) / 2 - 1;
                             if (
                               (t && M.isLabel
                                 ? (I += 3)
@@ -4666,8 +4667,8 @@
                                 "+" !== M.diff)
                               ))
                             ) {
-                              var x = se.insEllipse(M.width, M.height);
-                              O.push(se.move(n + M.x, (E.y + I) | 0, x));
+                              var N = se.insEllipse(M.width, M.height);
+                              O.push(se.move(n + M.x, (E.y + I) | 0, N));
                             }
                           }
                         }
@@ -4678,11 +4679,11 @@
                       }
                     }
                   }
-                  var N = this.drawSelf(h, this.height, y);
+                  var x = this.drawSelf(h, this.height, y);
                   return (
-                    O.splice(0, 0, N),
+                    O.splice(0, 0, x),
                     this.info.color &&
-                      se.setProps(N, { fill: this.info.color }),
+                      se.setProps(x, { fill: this.info.color }),
                     se.group(O)
                   );
                 },
@@ -4735,7 +4736,7 @@
           n(this, e), (this.label = be(e.label)), (this.width = null);
         }
         return (
-          r(
+          i(
             e,
             [
               {
@@ -4794,7 +4795,7 @@
             (this.y = 0);
         }
         return (
-          r(e, [
+          i(e, [
             {
               key: "isGlow",
               get: function () {
@@ -4813,15 +4814,15 @@
                 var e,
                   t = this.child,
                   s = this.width,
-                  r = this.height - 1;
+                  i = this.height - 1;
                 return (
                   (e = t.isScript
                     ? !t.isEmpty && t.blocks[0].isHat
-                      ? se.hatRect(s, r)
+                      ? se.hatRect(s, i)
                       : t.isFinal
-                        ? se.capRect(s, r)
-                        : se.stackRect(s, r)
-                    : t.drawSelf(s, r, [])),
+                        ? se.capRect(s, i)
+                        : se.stackRect(s, i)
+                    : t.drawSelf(s, i, [])),
                   se.setProps(e, { class: "sb-diff sb-diff-ins" })
                 );
               },
@@ -4847,7 +4848,7 @@
           n(this, e), (this.blocks = e.blocks.map(be)), (this.y = 0);
         }
         return (
-          r(e, [
+          i(e, [
             {
               key: "isScript",
               get: function () {
@@ -4876,11 +4877,11 @@
                 var t = [],
                   s = 0;
                 this.width = 0;
-                var r,
-                  i = l(this.blocks);
+                var i,
+                  r = l(this.blocks);
                 try {
-                  for (i.s(); !(r = i.n()).done; ) {
-                    var n = r.value,
+                  for (r.s(); !(i = r.n()).done; ) {
+                    var n = i.value,
                       o = e ? 0 : 2,
                       a = n.draw();
                     if (
@@ -4907,9 +4908,9 @@
                     }
                   }
                 } catch (e) {
-                  i.e(e);
+                  r.e(e);
                 } finally {
-                  i.f();
+                  r.f();
                 }
                 (this.height = s), e || this.isFinal || (this.height += 3);
                 var V = this.blocks[this.blocks.length - 1];
@@ -4931,7 +4932,7 @@
             (this.scale = t.scale);
         }
         return (
-          r(e, [
+          i(e, [
             {
               key: "measure",
               value: function () {
@@ -4948,16 +4949,16 @@
                 this.measure();
                 var t,
                   s = 0,
-                  r = 0,
-                  i = [],
+                  i = 0,
+                  r = [],
                   n = l(this.scripts);
                 try {
                   for (n.s(); !(t = n.n()).done; ) {
                     var a = t.value;
-                    r && (r += 10),
-                      (a.y = r),
-                      i.push(se.move(0, r, a.draw())),
-                      (r += a.height),
+                    i && (i += 10),
+                      (a.y = i),
+                      r.push(se.move(0, i, a.draw())),
+                      (i += a.height),
                       (s = Math.max(s, a.width + 4));
                   }
                 } catch (e) {
@@ -4965,8 +4966,8 @@
                 } finally {
                   n.f();
                 }
-                (this.width = s), (this.height = r);
-                var c = se.newSVG(s, r, this.scale);
+                (this.width = s), (this.height = i);
+                var c = se.newSVG(s, i, this.scale);
                 return (
                   c.appendChild(
                     (this.defs = se.withChildren(
@@ -4978,7 +4979,7 @@
                       ].concat(o(ae())),
                     )),
                   ),
-                  c.appendChild(se.group(i)),
+                  c.appendChild(se.group(r)),
                   (this.el = c),
                   c
                 );
@@ -5010,14 +5011,14 @@
                 var s = se.makeCanvas();
                 (s.width = Math.max(1, this.width * t * this.scale)),
                   (s.height = Math.max(1, this.height * t * this.scale));
-                var r = s.getContext("2d"),
-                  i = new Image();
-                (i.src = this.exportSVG()),
-                  (i.onload = function () {
-                    r.save(),
-                      r.scale(t, t),
-                      r.drawImage(i, 0, 0),
-                      r.restore(),
+                var i = s.getContext("2d"),
+                  r = new Image();
+                (r.src = this.exportSVG()),
+                  (r.onload = function () {
+                    i.save(),
+                      i.scale(t, t),
+                      i.drawImage(r, 0, 0),
+                      i.restore(),
                       e(s);
                   });
               },
@@ -5063,19 +5064,19 @@
         })(e))(e, t);
       };
     var me,
-      Ae,
-      ke = ie.makeStyle,
+      ke,
+      Ae = re.makeStyle,
       we = { textContent: !0 },
       Oe = (function () {
         function e() {}
         return (
-          r(e, null, [
+          i(e, null, [
             {
               key: "init",
               value: function (t) {
                 me = t.document;
                 var s = t.DOMParser;
-                (Ae = new s().parseFromString(
+                (ke = new s().parseFromString(
                   "<xml></xml>",
                   "application/xml",
                 )),
@@ -5091,26 +5092,26 @@
             {
               key: "cdata",
               value: function (e) {
-                return Ae.createCDATASection(e);
+                return ke.createCDATASection(e);
               },
             },
             {
               key: "el",
               value: function (t, s) {
-                var r = me.createElementNS("http://www.w3.org/2000/svg", t);
-                return e.setProps(r, s);
+                var i = me.createElementNS("http://www.w3.org/2000/svg", t);
+                return e.setProps(i, s);
               },
             },
             {
               key: "setProps",
               value: function (e, t) {
                 for (var s in t) {
-                  var r = t[s] + "";
+                  var i = t[s] + "";
                   we[s]
-                    ? (e[s] = r)
+                    ? (e[s] = i)
                     : null != t[s] &&
                       Object.prototype.hasOwnProperty.call(t, s) &&
-                      e.setAttributeNS(null, s, r);
+                      e.setAttributeNS(null, s, i);
                 }
                 return e;
               },
@@ -5119,16 +5120,16 @@
               key: "withChildren",
               value: function (e, t) {
                 var s,
-                  r = l(t);
+                  i = l(t);
                 try {
-                  for (r.s(); !(s = r.n()).done; ) {
-                    var i = s.value;
-                    e.appendChild(i);
+                  for (i.s(); !(s = i.n()).done; ) {
+                    var r = s.value;
+                    e.appendChild(r);
                   }
                 } catch (e) {
-                  r.e(e);
+                  i.e(e);
                 } finally {
-                  r.f();
+                  i.f();
                 }
                 return e;
               },
@@ -5141,12 +5142,12 @@
             },
             {
               key: "newSVG",
-              value: function (t, s, r) {
+              value: function (t, s, i) {
                 return e.el("svg", {
                   version: "1.1",
-                  width: t * r,
-                  height: s * r,
-                  viewBox: "0 0 " + t * r + " " + s * r,
+                  width: t * i,
+                  height: s * i,
+                  viewBox: "0 0 " + t * i + " " + s * i,
                 });
               },
             },
@@ -5170,10 +5171,10 @@
             },
             {
               key: "text",
-              value: function (s, r, i, n) {
+              value: function (s, i, r, n) {
                 var o = e.el(
                   "text",
-                  t(t({}, n), {}, { x: s, y: r, textContent: i }),
+                  t(t({}, n), {}, { x: s, y: i, textContent: r }),
                 );
                 return o;
               },
@@ -5186,35 +5187,35 @@
             },
             {
               key: "move",
-              value: function (t, s, r) {
+              value: function (t, s, i) {
                 return (
-                  e.setProps(r, {
+                  e.setProps(i, {
                     transform: "translate(" + t + " " + s + ")",
                   }),
-                  r
+                  i
                 );
               },
             },
             {
               key: "rect",
-              value: function (s, r, i) {
+              value: function (s, i, r) {
                 return e.el(
                   "rect",
-                  t(t({}, i), {}, { x: 0, y: 0, width: s, height: r }),
+                  t(t({}, r), {}, { x: 0, y: 0, width: s, height: i }),
                 );
               },
             },
             {
               key: "roundRect",
-              value: function (s, r, i) {
-                return e.rect(s, r, t(t({}, i), {}, { rx: 4, ry: 4 }));
+              value: function (s, i, r) {
+                return e.rect(s, i, t(t({}, r), {}, { rx: 4, ry: 4 }));
               },
             },
             {
               key: "pillRect",
-              value: function (s, r, i) {
-                var n = r / 2;
-                return e.rect(s, r, t(t({}, i), {}, { rx: n, ry: n }));
+              value: function (s, i, r) {
+                var n = i / 2;
+                return e.rect(s, i, t(t({}, r), {}, { rx: n, ry: n }));
               },
             },
             {
@@ -5233,8 +5234,8 @@
             },
             {
               key: "pointedRect",
-              value: function (s, r, i) {
-                return e.path(t(t({}, i), {}, { path: e.pointedPath(s, r) }));
+              value: function (s, i, r) {
+                return e.path(t(t({}, r), {}, { path: e.pointedPath(s, i) }));
               },
             },
             {
@@ -5271,13 +5272,13 @@
             },
             {
               key: "getRightAndBottom",
-              value: function (e, t, s, r) {
-                void 0 === r && (r = 0);
-                var i = ["L " + e + " " + (t - 4), "a 4 4 0 0 1 -4 4"];
+              value: function (e, t, s, i) {
+                void 0 === i && (i = 0);
+                var r = ["L " + e + " " + (t - 4), "a 4 4 0 0 1 -4 4"];
                 return (
                   s &&
-                    (i = i.concat([
-                      "L " + (r + 48) + " " + t,
+                    (r = r.concat([
+                      "L " + (i + 48) + " " + t,
                       "c -2 0 -3 1 -4 2",
                       "l -4 4",
                       "c -1 1 -2 2 -4 2",
@@ -5286,10 +5287,10 @@
                       "l -4 -4",
                       "c -1 -1 -2 -2 -4 -2",
                     ])),
-                  0 === r
-                    ? (i.push("L", r + 4, t), i.push("a 4 4 0 0 1 -4 -4"))
-                    : (i.push("L", r + 4, t), i.push("a 4 4 0 0 0 -4 4")),
-                  i.join(" ")
+                  0 === i
+                    ? (r.push("L", i + 4, t), r.push("a 4 4 0 0 1 -4 -4"))
+                    : (r.push("L", i + 4, t), r.push("a 4 4 0 0 0 -4 4")),
+                  r.join(" ")
                 );
               },
             },
@@ -5324,15 +5325,15 @@
             },
             {
               key: "stackRect",
-              value: function (s, r, i) {
+              value: function (s, i, r) {
                 return e.path(
                   t(
-                    t({}, i),
+                    t({}, r),
                     {},
                     {
                       path: [
                         e.getTop(s),
-                        e.getRightAndBottom(s, r, !0, 0),
+                        e.getRightAndBottom(s, i, !0, 0),
                         "Z",
                       ],
                     },
@@ -5348,8 +5349,8 @@
             },
             {
               key: "capRect",
-              value: function (s, r, i) {
-                return e.path(t(t({}, i), {}, { path: e.capPath(s, r) }));
+              value: function (s, i, r) {
+                return e.path(t(t({}, r), {}, { path: e.capPath(s, i) }));
               },
             },
             {
@@ -5374,15 +5375,15 @@
             },
             {
               key: "hatRect",
-              value: function (s, r, i) {
+              value: function (s, i, r) {
                 return e.path(
                   t(
-                    t({}, i),
+                    t({}, r),
                     {},
                     {
                       path: [
                         e.getHatTop(s),
-                        e.getRightAndBottom(s, r, !0, 0),
+                        e.getRightAndBottom(s, i, !0, 0),
                         "Z",
                       ],
                     },
@@ -5392,16 +5393,16 @@
             },
             {
               key: "catHat",
-              value: function (s, r, i) {
+              value: function (s, i, r) {
                 return e.group([
                   e.path(
                     t(
-                      t({}, i),
+                      t({}, r),
                       {},
                       {
                         path: [
                           e.getCatTop(s),
-                          e.getRightAndBottom(s, r, !0, 0),
+                          e.getRightAndBottom(s, i, !0, 0),
                           "Z",
                         ],
                       },
@@ -5454,15 +5455,15 @@
             },
             {
               key: "procHatRect",
-              value: function (s, r, i) {
+              value: function (s, i, r) {
                 return e.path(
                   t(
-                    t({}, i),
+                    t({}, r),
                     {},
                     {
                       path: [
                         e.getProcHatTop(s),
-                        e.getRightAndBottom(s, r, !0, 0),
+                        e.getRightAndBottom(s, i, !0, 0),
                         "Z",
                       ],
                     },
@@ -5472,7 +5473,7 @@
             },
             {
               key: "mouthRect",
-              value: function (s, r, i, n, o) {
+              value: function (s, i, r, n, o) {
                 for (
                   var a = n[0].height,
                     c = [e.getTop(s), e.getRightAndBottom(s, a, !0, 16)],
@@ -5486,7 +5487,7 @@
                     p.isFinal
                       ? c.push(e.getArmNoNotch(s, a))
                       : c.push(e.getArm(s, a));
-                  var u = !(h && i),
+                  var u = !(h && r),
                     f = h ? 0 : 16;
                   (a += n[l + 1].height + 3),
                     c.push(e.getRightAndBottom(s, a, u, f));
@@ -5496,30 +5497,30 @@
             },
             {
               key: "commentRect",
-              value: function (s, r, i) {
+              value: function (s, i, r) {
                 return e.roundRect(
                   s,
-                  r,
-                  t(t({}, i), {}, { class: "sb3-comment" }),
+                  i,
+                  t(t({}, r), {}, { class: "sb3-comment" }),
                 );
               },
             },
             {
               key: "commentLine",
-              value: function (s, r) {
+              value: function (s, i) {
                 return e.move(
                   -s,
                   9,
-                  e.rect(s, 2, t(t({}, r), {}, { class: "sb3-comment-line" })),
+                  e.rect(s, 2, t(t({}, i), {}, { class: "sb3-comment-line" })),
                 );
               },
             },
             {
               key: "strikethroughLine",
-              value: function (s, r) {
+              value: function (s, i) {
                 return e.path(
                   t(
-                    t({}, r),
+                    t({}, i),
                     {},
                     {
                       path: ["M", 0, 0, "L", s, 0],
@@ -5547,11 +5548,11 @@
       Le = (function () {
         function e() {}
         return (
-          r(e, null, [
+          i(e, null, [
             {
               key: "cssContent",
               get: function () {
-                return ".scratchblocks-style-scratch3,.scratchblocks-style-scratch3-high-contrast{--sb3-input-color-stroke:#fff;--sb3-input-fill:#fff;--sb3-motion-tertiary:#3373cc;--sb3-looks-tertiary:#774dcb;--sb3-sound-tertiary:#bd42bd;--sb3-control-tertiary:#cf8b17;--sb3-events-tertiary:#cc9900;--sb3-sensing-tertiary:#2e8eb8;--sb3-operators-tertiary:#389438;--sb3-variables-tertiary:#db6e00;--sb3-list-tertiary:#e64d00;--sb3-extension-tertiary:#0b8e69;--sb3-grey-primary:#bfbfbf;--sb3-grey-secondary:#b2b2b2}.scratchblocks-style-scratch3{--sb3-label:#fff;--sb3-literal:#575e75;--sb3-motion-primary:#4c97ff;--sb3-motion-secondary:#4280d7;--sb3-looks-primary:#9966ff;--sb3-looks-secondary:#855cd6;--sb3-sound-primary:#cf63cf;--sb3-sound-secondary:#c94fc9;--sb3-control-primary:#ffab19;--sb3-control-secondary:#ec9c13;--sb3-events-primary:#ffbf00;--sb3-events-secondary:#e6ac00;--sb3-sensing-primary:#5cb1d6;--sb3-sensing-secondary:#47a8d1;--sb3-operators-primary:#59c059;--sb3-operators-secondary:#46b946;--sb3-variables-primary:#ff8c1a;--sb3-variables-secondary:#ff8000;--sb3-list-primary:#ff661a;--sb3-list-secondary:#ff5500;--sb3-custom-primary:#ff6680;--sb3-custom-secondary:#ff4d6a;--sb3-custom-tertiary:#ff3355;--sb3-extension-primary:#0fbd8c;--sb3-extension-secondary:#0da57a;--sb3-obsolete-primary:#ed4242;--sb3-obsolete-secondary:#db3333;--sb3-obsolete-tertiary:#ca2b2b;--sb3-grey-tertiary:#909090}.scratchblocks-style-scratch3-high-contrast{--sb3-label:#000;--sb3-literal:#000;--sb3-motion-primary:#80b5ff;--sb3-motion-secondary:#b3d2ff;--sb3-looks-primary:#ccb3ff;--sb3-looks-secondary:#ddccff;--sb3-sound-primary:#e19de1;--sb3-sound-secondary:#ffb3ff;--sb3-control-primary:#ffbe4c;--sb3-control-secondary:#ffda99;--sb3-events-primary:#ffd966;--sb3-events-secondary:#ffecb3;--sb3-sensing-primary:#85c4e0;--sb3-sensing-secondary:#aed8ea;--sb3-operators-primary:#7ece7e;--sb3-operators-secondary:#b5e3b5;--sb3-variables-primary:#ffa54c;--sb3-variables-secondary:#ffcc99;--sb3-list-primary:#ff9966;--sb3-list-secondary:#ffcab0;--sb3-custom-primary:#ff99aa;--sb3-custom-secondary:#ffccd5;--sb3-custom-tertiary:#e64d00;--sb3-extension-primary:#13ecaf;--sb3-extension-secondary:#75f0cd;--sb3-obsolete-primary:#fc6666;--sb3-obsolete-secondary:#fcb0b0;--sb3-obsolete-tertiary:#d32121;--sb3-grey-tertiary:#959595}.sb3-label{font:500 12pt Helvetica Neue,Helvetica,sans-serif;fill:var(--sb3-label, #fff);word-spacing:1pt}.sb3-motion{fill:var(--sb3-motion-primary, #4c97ff);stroke:var(--sb3-motion-tertiary, #3373cc)}.sb3-motion-alt{fill:var(--sb3-motion-secondary, #4280d7)}.sb3-motion-dark{fill:var(--sb3-motion-tertiary, #3373cc)}.sb3-looks{fill:var(--sb3-looks-primary, #9966ff);stroke:var(--sb3-looks-tertiary, #774dcb)}.sb3-looks-alt{fill:var(--sb3-looks-secondary, #855cd6)}.sb3-looks-dark{fill:var(--sb3-looks-tertiary, #774dcb)}.sb3-sound{fill:var(--sb3-sound-primary, #cf63cf);stroke:var(--sb3-sound-tertiary, #bd42bd)}.sb3-sound-alt{fill:var(--sb3-sound-secondary, #c94fc9)}.sb3-sound-dark{fill:var(--sb3-sound-tertiary, #bd42bd)}.sb3-control{fill:var(--sb3-control-primary, #ffab19);stroke:var(--sb3-control-tertiary, #cf8b17)}.sb3-control-alt{fill:var(--sb3-control-secondary, #ec9c13)}.sb3-control-dark{fill:var(--sb3-control-tertiary, #cf8b17)}.sb3-events{fill:var(--sb3-events-primary, #ffbf00);stroke:var(--sb3-events-tertiary, #cc9900)}.sb3-events-alt{fill:var(--sb3-events-secondary, #e6ac00)}.sb3-events-dark{fill:var(--sb3-events-tertiary, #cc9900)}.sb3-sensing{fill:var(--sb3-sensing-primary, #5cb1d6);stroke:var(--sb3-sensing-tertiary, #2e8eb8)}.sb3-sensing-alt{fill:var(--sb3-sensing-secondary, #47a8d1)}.sb3-sensing-dark{fill:var(--sb3-sensing-tertiary, #2e8eb8)}.sb3-operators{fill:var(--sb3-operators-primary, #59c059);stroke:var(--sb3-operators-tertiary, #389438)}.sb3-operators-alt{fill:var(--sb3-operators-secondary, #46b946)}.sb3-operators-dark{fill:var(--sb3-operators-tertiary, #389438)}.sb3-variables{fill:var(--sb3-variables-primary, #ff8c1a);stroke:var(--sb3-variables-tertiary, #db6e00)}.sb3-variables-alt{fill:var(--sb3-variables-secondary, #ff8000)}.sb3-variables-dark{fill:var(--sb3-variables-tertiary, #db6e00)}.sb3-list{fill:var(--sb3-list-primary, #ff661a);stroke:var(--sb3-list-tertiary, #e64d00)}.sb3-list-alt{fill:var(--sb3-list-secondary, #ff5500)}.sb3-list-dark{fill:var(--sb3-list-tertiary, #e64d00)}.sb3-custom{fill:var(--sb3-custom-primary, #ff6680);stroke:var(--sb3-custom-tertiary, #ff3355)}.sb3-custom-alt{fill:var(--sb3-custom-secondary, #ff4d6a)}.sb3-custom-dark{fill:var(--sb3-custom-tertiary, #ff3355)}.sb3-custom-arg{fill:var(--sb3-custom-primary, #ff6680);stroke:var(--sb3-custom-tertiary, #ff3355)}.sb3-extension{fill:var(--sb3-extension-primary, #0fbd8c);stroke:var(--sb3-extension-tertiary, #0b8e69)}.sb3-extension-alt{fill:var(--sb3-extension-secondary, #0da57a)}.sb3-extension-line{stroke:var(--sb3-extension-secondary, #0da57a)}.sb3-extension-dark{fill:var(--sb3-extension-tertiary, #0b8e69)}.sb3-obsolete{fill:var(--sb3-obsolete-primary, #ed4242);stroke:var(--sb3-obsolete-tertiary, #ca2b2b)}.sb3-obsolete-alt{fill:var(--sb3-obsolete-secondary, #db3333)}.sb3-obsolete-dark{fill:var(--sb3-obsolete-tertiary, #ca2b2b)}.sb3-grey{fill:var(--sb3-grey-primary, #bfbfbf);stroke:var(--sb3-grey-tertiary, #909090)}.sb3-grey-alt{fill:var(--sb3-grey-secondary, #b2b2b2)}.sb3-grey-dark{fill:var(--sb3-grey-tertiary, #909090)}.sb3-input-color{stroke:var(--sb3-input-color-stroke, #fff)}.sb3-input-number,.sb3-input-string{fill:var(--sb3-input-fill, #fff)}.sb3-literal-dropdown,.sb3-literal-number,.sb3-literal-number-dropdown,.sb3-literal-string{word-spacing:0}.sb3-literal-number,.sb3-literal-string{fill:var(--sb3-literal, #575e75)}.sb3-comment{fill:#ffffa5;stroke:#d0d1d2;stroke-width:1}.sb3-comment-line{fill:#ffff80}.sb3-comment-label{font:400 12pt Helvetica Neue,Helvetica,sans-serif;fill:#000;word-spacing:0}.sb3-diff{fill:none;stroke:#000}.sb3-diff-ins{stroke-width:2px}.sb3-diff-del{stroke-width:3px}";
+                return ".sb3-label{font:500 12pt Helvetica Neue,Helvetica,sans-serif;word-spacing:1pt}.sb3-literal-dropdown,.sb3-literal-number,.sb3-literal-number-dropdown,.sb3-literal-string{word-spacing:0}.sb3-diff{fill:none;stroke:#000}.sb3-diff-ins{stroke-width:2px}.sb3-diff-del{stroke-width:3px}svg .sb3-motion{fill:#4c97ff;stroke:#3373cc}svg .sb3-motion-alt{fill:#4280d7}svg .sb3-motion-dark{fill:#3373cc}svg .sb3-looks{fill:#96f;stroke:#774dcb}svg .sb3-looks-alt{fill:#855cd6}svg .sb3-looks-dark{fill:#774dcb}svg .sb3-sound{fill:#cf63cf;stroke:#bd42bd}svg .sb3-sound-alt{fill:#c94fc9}svg .sb3-sound-dark{fill:#bd42bd}svg .sb3-control{fill:#ffab19;stroke:#cf8b17}svg .sb3-control-alt{fill:#ec9c13}svg .sb3-control-dark{fill:#cf8b17}svg .sb3-events{fill:#ffbf00;stroke:#c90}svg .sb3-events-alt{fill:#e6ac00}svg .sb3-events-dark{fill:#c90}svg .sb3-sensing{fill:#5cb1d6;stroke:#2e8eb8}svg .sb3-sensing-alt{fill:#47a8d1}svg .sb3-sensing-dark{fill:#2e8eb8}svg .sb3-operators{fill:#59c059;stroke:#389438}svg .sb3-operators-alt{fill:#46b946}svg .sb3-operators-dark{fill:#389438}svg .sb3-variables{fill:#ff8c1a;stroke:#db6e00}svg .sb3-variables-alt{fill:#ff8000}svg .sb3-variables-dark{fill:#db6e00}svg .sb3-list{fill:#ff661a;stroke:#e64d00}svg .sb3-list-alt{fill:#f50}svg .sb3-list-dark{fill:#e64d00}svg .sb3-custom{fill:#ff6680;stroke:#f35}svg .sb3-custom-alt{fill:#ff4d6a}svg .sb3-custom-dark{fill:#f35}svg .sb3-extension{fill:#0fbd8c;stroke:#0b8e69}svg .sb3-extension-alt{fill:#0da57a}svg .sb3-extension-dark{fill:#0b8e69}svg .sb3-obsolete{fill:#ed4242;stroke:#ca2b2b}svg .sb3-obsolete-alt{fill:#db3333}svg .sb3-obsolete-dark{fill:#ca2b2b}svg .sb3-grey{fill:#bfbfbf;stroke:#909090}svg .sb3-grey-alt{fill:#b2b2b2}svg .sb3-grey-dark{fill:#909090}svg .sb3-label{fill:#fff}svg .sb3-input-color{stroke:#fff}svg .sb3-input-number,svg .sb3-input-string{fill:#fff}svg .sb3-literal-number,svg .sb3-literal-string{fill:#575e75}svg .sb3-custom-arg{fill:#ff6680;stroke:#f35}svg.scratchblocks-style-scratch3-high-contrast .sb3-motion{fill:#80b5ff;stroke:#3373cc}svg.scratchblocks-style-scratch3-high-contrast .sb3-motion-alt{fill:#b3d2ff}svg.scratchblocks-style-scratch3-high-contrast .sb3-motion-dark{fill:#3373cc}svg.scratchblocks-style-scratch3-high-contrast .sb3-looks{fill:#ccb3ff;stroke:#774dcb}svg.scratchblocks-style-scratch3-high-contrast .sb3-looks-alt{fill:#dcf}svg.scratchblocks-style-scratch3-high-contrast .sb3-looks-dark{fill:#774dcb}svg.scratchblocks-style-scratch3-high-contrast .sb3-sound{fill:#e19de1;stroke:#bd42bd}svg.scratchblocks-style-scratch3-high-contrast .sb3-sound-alt{fill:#ffb3ff}svg.scratchblocks-style-scratch3-high-contrast .sb3-sound-dark{fill:#bd42bd}svg.scratchblocks-style-scratch3-high-contrast .sb3-control{fill:#ffbe4c;stroke:#cf8b17}svg.scratchblocks-style-scratch3-high-contrast .sb3-control-alt{fill:#ffda99}svg.scratchblocks-style-scratch3-high-contrast .sb3-control-dark{fill:#cf8b17}svg.scratchblocks-style-scratch3-high-contrast .sb3-events{fill:#ffd966;stroke:#c90}svg.scratchblocks-style-scratch3-high-contrast .sb3-events-alt{fill:#ffecb3}svg.scratchblocks-style-scratch3-high-contrast .sb3-events-dark{fill:#c90}svg.scratchblocks-style-scratch3-high-contrast .sb3-sensing{fill:#85c4e0;stroke:#2e8eb8}svg.scratchblocks-style-scratch3-high-contrast .sb3-sensing-alt{fill:#aed8ea}svg.scratchblocks-style-scratch3-high-contrast .sb3-sensing-dark{fill:#2e8eb8}svg.scratchblocks-style-scratch3-high-contrast .sb3-operators{fill:#7ece7e;stroke:#389438}svg.scratchblocks-style-scratch3-high-contrast .sb3-operators-alt{fill:#b5e3b5}svg.scratchblocks-style-scratch3-high-contrast .sb3-operators-dark{fill:#389438}svg.scratchblocks-style-scratch3-high-contrast .sb3-variables{fill:#ffa54c;stroke:#db6e00}svg.scratchblocks-style-scratch3-high-contrast .sb3-variables-alt{fill:#fc9}svg.scratchblocks-style-scratch3-high-contrast .sb3-variables-dark{fill:#db6e00}svg.scratchblocks-style-scratch3-high-contrast .sb3-list{fill:#f96;stroke:#e64d00}svg.scratchblocks-style-scratch3-high-contrast .sb3-list-alt{fill:#ffcab0}svg.scratchblocks-style-scratch3-high-contrast .sb3-list-dark{fill:#e64d00}svg.scratchblocks-style-scratch3-high-contrast .sb3-custom{fill:#f9a;stroke:#e64d00}svg.scratchblocks-style-scratch3-high-contrast .sb3-custom-alt{fill:#ffccd5}svg.scratchblocks-style-scratch3-high-contrast .sb3-custom-dark{fill:#e64d00}svg.scratchblocks-style-scratch3-high-contrast .sb3-extension{fill:#13ecaf;stroke:#0b8e69}svg.scratchblocks-style-scratch3-high-contrast .sb3-extension-alt{fill:#75f0cd}svg.scratchblocks-style-scratch3-high-contrast .sb3-extension-dark{fill:#0b8e69}svg.scratchblocks-style-scratch3-high-contrast .sb3-obsolete{fill:#fc6666;stroke:#d32121}svg.scratchblocks-style-scratch3-high-contrast .sb3-obsolete-alt{fill:#fcb0b0}svg.scratchblocks-style-scratch3-high-contrast .sb3-obsolete-dark{fill:#d32121}svg.scratchblocks-style-scratch3-high-contrast .sb3-grey{fill:#bfbfbf;stroke:#959595}svg.scratchblocks-style-scratch3-high-contrast .sb3-grey-alt{fill:#b2b2b2}svg.scratchblocks-style-scratch3-high-contrast .sb3-grey-dark{fill:#959595}svg.scratchblocks-style-scratch3-high-contrast .sb3-label{fill:#000}svg.scratchblocks-style-scratch3-high-contrast .sb3-input-color{stroke:#fff}svg.scratchblocks-style-scratch3-high-contrast .sb3-input-number,svg.scratchblocks-style-scratch3-high-contrast .sb3-input-string{fill:#fff}svg.scratchblocks-style-scratch3-high-contrast .sb3-literal-number,svg.scratchblocks-style-scratch3-high-contrast .sb3-literal-string{fill:#000}svg.scratchblocks-style-scratch3-high-contrast .sb3-custom-arg{fill:#f9a;stroke:#e64d00}.sb3-comment{fill:#ffffa5;stroke:#d0d1d2;stroke-width:1}.sb3-comment-line{fill:#ffff80}.sb3-comment-label,.sb3-label.sb3-comment-label{font:400 12pt Helvetica Neue,Helvetica,sans-serif;fill:#000;word-spacing:0}";
               },
             },
             {
@@ -6267,7 +6268,7 @@
       Ce = Le.makeOriginalIcons,
       Me = Le.makeHighContrastIcons,
       Ie = Le.iconName,
-      xe = (function () {
+      Ne = (function () {
         function e(e) {
           n(this, e),
             (this.el = null),
@@ -6276,7 +6277,7 @@
             (this.x = 0);
         }
         return (
-          r(
+          i(
             e,
             [
               {
@@ -6303,15 +6304,15 @@
                   var t = this.value,
                     s = "sb3-" + this.cls;
                   this.el = Oe.text(0, 13, t, { class: "sb3-label " + s });
-                  var r = e.metricsCache[s];
+                  var i = e.metricsCache[s];
                   if (
-                    (r || (r = e.metricsCache[s] = Object.create(null)),
-                    Object.hasOwnProperty.call(r, t))
+                    (i || (i = e.metricsCache[s] = Object.create(null)),
+                    Object.hasOwnProperty.call(i, t))
                   )
-                    this.metrics = r[t];
+                    this.metrics = i[t];
                   else {
-                    var i = /comment-label/.test(this.cls) ? Te : Ee;
-                    this.metrics = r[t] = e.measure(t, i);
+                    var r = /comment-label/.test(this.cls) ? Te : Ee;
+                    this.metrics = i[t] = e.measure(t, r);
                   }
                 },
               },
@@ -6320,9 +6321,9 @@
               {
                 key: "measure",
                 value: function (t, s) {
-                  var r = e.measuring;
+                  var i = e.measuring;
                   return (
-                    (r.font = s), { width: (r.measureText(t).width + 0.5) | 0 }
+                    (i.font = s), { width: (i.measureText(t).width + 0.5) | 0 }
                   );
                 },
               },
@@ -6331,8 +6332,8 @@
           e
         );
       })();
-    (xe.metricsCache = {}), (xe.toMeasure = []);
-    var Ne = (function () {
+    (Ne.metricsCache = {}), (Ne.toMeasure = []);
+    var xe = (function () {
         function e(t) {
           n(this, t);
           var s = e.icons[this.name];
@@ -6340,7 +6341,7 @@
           n(this, s);
         }
         return (
-          r(
+          i(
             e,
             [
               {
@@ -6396,7 +6397,7 @@
           (this.width = 1), (this.height = 40), (this.x = 0);
         }
         return (
-          r(e, [
+          i(e, [
             {
               key: "isLine",
               get: function () {
@@ -6432,7 +6433,7 @@
             (this.x = 0);
         }
         return (
-          r(
+          i(
             e,
             [
               {
@@ -6450,18 +6451,18 @@
               {
                 key: "draw",
                 value: function (t, s) {
-                  var r, i;
-                  if (this.isBoolean) r = 48;
-                  else if (this.isColor) r = 40;
+                  var i, r;
+                  if (this.isBoolean) i = 48;
+                  else if (this.isColor) i = 40;
                   else if (this.hasLabel) {
-                    i = this.label.draw(t);
+                    r = this.label.draw(t);
                     var n =
                       this.label.width >= 18 ? 11 : (40 - this.label.width) / 2;
-                    (r = this.label.width + 2 * n), (i = Oe.move(n, 9, i));
-                  } else r = this.isInset ? 30 : null;
-                  this.hasArrow && (r += 20), (this.width = r);
+                    (i = this.label.width + 2 * n), (r = Oe.move(n, 9, r));
+                  } else i = this.isInset ? 30 : null;
+                  this.hasArrow && (i += 20), (this.width = i);
                   var o = (this.height = 32),
-                    a = e.shapes[this.shape](r, o);
+                    a = e.shapes[this.shape](i, o);
                   Oe.setProps(a, {
                     class:
                       (this.isColor ? "" : "sb3-" + s.info.category) +
@@ -6490,11 +6491,11 @@
                               Oe.setProps(a, { fill: "rgba(0, 0, 0, 0.15)" }));
                   var c = Oe.group([a]);
                   return (
-                    this.hasLabel && c.appendChild(i),
+                    this.hasLabel && c.appendChild(r),
                     this.hasArrow &&
                       c.appendChild(
                         Oe.move(
-                          r - 24,
+                          i - 24,
                           13,
                           Oe.symbol(
                             "high-contrast" === t
@@ -6542,7 +6543,7 @@
             Object.prototype.hasOwnProperty.call(u, this.info.category) &&
               (this.children.unshift(new Be()),
               this.children.unshift(
-                new Ne({ name: this.info.category + "Block" }),
+                new xe({ name: this.info.category + "Block" }),
               ),
               (this.info.category = "extension")),
             (this.x = 0),
@@ -6552,7 +6553,7 @@
             (this.innerWidth = null);
         }
         return (
-          r(
+          i(
             e,
             [
               {
@@ -6581,13 +6582,13 @@
               },
               {
                 key: "drawSelf",
-                value: function (t, s, r, i) {
-                  if (i.length > 1)
-                    return Oe.mouthRect(s, r, this.isFinal, i, {
+                value: function (t, s, i, r) {
+                  if (r.length > 1)
+                    return Oe.mouthRect(s, i, this.isFinal, r, {
                       class: "sb3-" + this.info.category,
                     });
                   if ("outline" === this.info.shape)
-                    return Oe.setProps(Oe.stackRect(s, r), {
+                    return Oe.setProps(Oe.stackRect(s, i), {
                       class:
                         "sb3-" +
                         this.info.category +
@@ -6598,13 +6599,13 @@
                   if (this.isRing) {
                     var n = this.children[0];
                     if (n && (n.isInput || n.isBlock || n.isScript))
-                      return Oe.roundRect(s, r, {
+                      return Oe.roundRect(s, i, {
                         class: "sb3-" + this.info.category,
                       });
                   }
                   var o = e.shapes[this.info.shape];
                   if (!o) throw Error("no shape func: " + this.info.shape);
-                  return o(s, r, { class: "sb3-" + this.info.category });
+                  return o(s, i, { class: "sb3-" + this.info.category });
                 },
               },
               {
@@ -6637,8 +6638,8 @@
                 key: "draw",
                 value: function (t) {
                   var s = "define-hat" === this.info.shape,
-                    r = this.children,
-                    i = this.isCommand,
+                    i = this.children,
+                    r = this.isCommand,
                     n = e.padding[this.info.shape] || e.padding.null,
                     o = n[0],
                     a = n[1],
@@ -6646,7 +6647,7 @@
                     l = function (e) {
                       (this.y = e),
                         (this.width = 0),
-                        (this.height = i ? 40 : 32),
+                        (this.height = r ? 40 : 32),
                         (this.children = []);
                     },
                     h = 0,
@@ -6663,58 +6664,58 @@
                     var d,
                       g = 0,
                       V = function () {
-                        r = r
+                        i = i
                           .slice(0, g)
-                          .concat(r.slice(g, d).reverse())
-                          .concat(r.slice(d));
+                          .concat(i.slice(g, d).reverse())
+                          .concat(i.slice(d));
                       };
-                    for (d = 0; d < r.length; d++)
-                      r[d].isScript && (V(), (g = d + 1));
+                    for (d = 0; d < i.length; d++)
+                      i[d].isScript && (V(), (g = d + 1));
                     g < d && V();
                   }
-                  for (var y, v, b = [], m = 0; m < r.length; m++) {
-                    var A = r[m];
+                  for (var y, v, b = [], m = 0; m < i.length; m++) {
+                    var k = i[m];
                     if (
-                      ((A.el = A.draw(t, this)), A.isScript && this.isCommand)
+                      ((k.el = k.draw(t, this)), k.isScript && this.isCommand)
                     )
                       (this.hasScript = !0),
                         f(),
-                        (A.y = c - 1),
-                        b.push(A),
-                        (p = Math.max(p, Math.max(1, A.width))),
-                        (A.height = Math.max(29, A.height + 3) - 2),
-                        (c += A.height),
+                        (k.y = c - 1),
+                        b.push(k),
+                        (p = Math.max(p, Math.max(1, k.width))),
+                        (k.height = Math.max(29, k.height + 3) - 2),
+                        (c += k.height),
                         (u = new l(c)),
                         (y = null);
-                    else if (A.isArrow) u.children.push(A), (y = A);
+                    else if (k.isArrow) u.children.push(k), (y = k);
                     else {
                       if (
-                        (b.length || (v = A),
-                        y && (u.width += this.marginBetween(y, A)),
-                        null != r[0])
+                        (b.length || (v = k),
+                        y && (u.width += this.marginBetween(y, k)),
+                        null != i[0])
                       ) {
-                        var k = 48 - this.horizontalPadding(r[0]);
+                        var A = 48 - this.horizontalPadding(i[0]);
                         (this.isCommand || this.isOutline) &&
-                          !A.isLabel &&
-                          !A.isIcon &&
-                          u.width < k &&
-                          (u.width = k);
+                          !k.isLabel &&
+                          !k.isIcon &&
+                          u.width < A &&
+                          (u.width = A);
                       }
-                      A.isIcon &&
+                      k.isIcon &&
                         0 === m &&
                         this.isCommand &&
-                        (u.height = Math.max(u.height, A.height + 8)),
-                        (A.x = u.width),
-                        (u.width += A.width),
+                        (u.height = Math.max(u.height, k.height + 8)),
+                        (k.x = u.width),
+                        (u.width += k.width),
                         (h = Math.max(h, u.width)),
-                        A.isLabel || (u.height = Math.max(u.height, A.height)),
-                        u.children.push(A),
-                        (y = A);
+                        k.isLabel || (u.height = Math.max(u.height, k.height)),
+                        u.children.push(k),
+                        (y = k);
                     }
                   }
                   f();
-                  var w = r.length ? this.horizontalPadding(r[0]) : 0,
-                    O = (h += w + (r.length ? this.horizontalPadding(v) : 0));
+                  var w = i.length ? this.horizontalPadding(i[0]) : 0,
+                    O = (h += w + (i.length ? this.horizontalPadding(v) : 0));
                   (h = Math.max(
                     this.hasScript
                       ? 160
@@ -6762,11 +6763,11 @@
                         }
                       }
                   }
-                  var x = this.drawSelf(t, h, this.height, b);
+                  var N = this.drawSelf(t, h, this.height, b);
                   return (
-                    S.splice(0, 0, x),
+                    S.splice(0, 0, N),
                     this.info.color &&
-                      Oe.setProps(x, {
+                      Oe.setProps(N, {
                         fill: this.info.color,
                         stroke: "rgba(0, 0, 0, 0.2)",
                       }),
@@ -6816,7 +6817,7 @@
           n(this, e), (this.label = Ue(e.label)), (this.width = null);
         }
         return (
-          r(
+          i(
             e,
             [
               {
@@ -6875,7 +6876,7 @@
             (this.y = 0);
         }
         return (
-          r(e, [
+          i(e, [
             {
               key: "isGlow",
               get: function () {
@@ -6894,15 +6895,15 @@
                 var e,
                   t = this.child,
                   s = this.width,
-                  r = this.height - 1;
+                  i = this.height - 1;
                 return (
                   (e = t.isScript
                     ? !t.isEmpty && t.blocks[0].isHat
-                      ? Oe.hatRect(s, r)
+                      ? Oe.hatRect(s, i)
                       : t.isFinal
-                        ? Oe.capRect(s, r)
-                        : Oe.stackRect(s, r)
-                    : t.drawSelf(s, r, [])),
+                        ? Oe.capRect(s, i)
+                        : Oe.stackRect(s, i)
+                    : t.drawSelf(s, i, [])),
                   Oe.setProps(e, { class: "sb3-diff sb3-diff-ins" })
                 );
               },
@@ -6928,7 +6929,7 @@
           n(this, e), (this.blocks = e.blocks.map(Ue)), (this.y = 0);
         }
         return (
-          r(e, [
+          i(e, [
             {
               key: "isScript",
               get: function () {
@@ -6955,33 +6956,33 @@
               key: "draw",
               value: function (e, t) {
                 var s = [],
-                  r = 1;
+                  i = 1;
                 this.width = 0;
-                var i,
+                var r,
                   n = l(this.blocks);
                 try {
-                  for (n.s(); !(i = n.n()).done; ) {
-                    var o = i.value,
+                  for (n.s(); !(r = n.n()).done; ) {
+                    var o = r.value,
                       a = t ? 0 : 2,
                       c = o.draw(e);
                     if (
-                      (s.push(Oe.move(a, r, c)),
+                      (s.push(Oe.move(a, i, c)),
                       (this.width = Math.max(this.width, o.width)),
                       "-" === o.diff)
                     ) {
                       var h = o.width,
                         p = o.firstLine.height || o.height;
                       s.push(
-                        Oe.move(a, r + p / 2 + 1, Oe.strikethroughLine(h)),
+                        Oe.move(a, i + p / 2 + 1, Oe.strikethroughLine(h)),
                       ),
                         (this.width = Math.max(this.width, o.width));
                     }
-                    r += o.height;
+                    i += o.height;
                     var u = o.comment;
                     if (u) {
                       var f = o.firstLine,
                         d = o.innerWidth + 2 + Fe.lineLength,
-                        g = r - o.height + f.height / 2,
+                        g = i - o.height + f.height / 2,
                         V = u.draw(e);
                       s.push(Oe.move(d, g - u.height / 2, V)),
                         (this.width = Math.max(this.width, d + u.width));
@@ -6994,7 +6995,7 @@
                 }
                 var y = this.blocks[this.blocks.length - 1];
                 return (
-                  (this.height = r + 1),
+                  (this.height = i + 1),
                   t || this.isFinal || (this.height += y.hasPuzzle ? 8 : 0),
                   !t && y.isGlow && (this.height += 7),
                   Oe.group(s)
@@ -7017,7 +7018,7 @@
             (this.iconStyle = t.style.replace("scratch3-", ""));
         }
         return (
-          r(e, [
+          i(e, [
             {
               key: "measure",
               value: function () {
@@ -7033,16 +7034,16 @@
                   throw Error("render() no longer takes a callback");
                 this.measure();
                 for (
-                  var t = 0, s = 0, r = [], i = 0;
-                  i < this.scripts.length;
-                  i++
+                  var t = 0, s = 0, i = [], r = 0;
+                  r < this.scripts.length;
+                  r++
                 ) {
-                  var n = this.scripts[i];
+                  var n = this.scripts[r];
                   s && (s += 10),
                     (n.y = s),
-                    r.push(Oe.move(0, s, n.draw(this.iconStyle))),
+                    i.push(Oe.move(0, s, n.draw(this.iconStyle))),
                     (s += n.height),
-                    i !== this.scripts.length - 1 && (s += 36),
+                    r !== this.scripts.length - 1 && (s += 36),
                     (t = Math.max(t, n.width + 4));
                 }
                 (this.width = t), (this.height = s);
@@ -7053,7 +7054,7 @@
                     (this.defs = Oe.withChildren(Oe.el("defs"), a)),
                   ),
                   o.appendChild(
-                    Oe.setProps(Oe.group(r), {
+                    Oe.setProps(Oe.group(i), {
                       style: "transform: scale(" + this.scale + ")",
                     }),
                   ),
@@ -7088,14 +7089,14 @@
                 var s = Oe.makeCanvas();
                 (s.width = Math.max(1, this.width * t * this.scale)),
                   (s.height = Math.max(1, this.height * t * this.scale));
-                var r = s.getContext("2d"),
-                  i = new Image();
-                (i.src = this.exportSVG()),
-                  (i.onload = function () {
-                    r.save(),
-                      r.scale(t, t),
-                      r.drawImage(i, 0, 0),
-                      r.restore(),
+                var i = s.getContext("2d"),
+                  r = new Image();
+                (r.src = this.exportSVG()),
+                  (r.onload = function () {
+                    i.save(),
+                      i.scale(t, t),
+                      i.drawImage(r, 0, 0),
+                      i.restore(),
                       e(s);
                   });
               },
@@ -7120,9 +7121,9 @@
         return new ((function (e) {
           switch (e.constructor) {
             case P:
-              return xe;
-            case F:
               return Ne;
+            case F:
+              return xe;
             case z:
               return De;
             case H:
@@ -7143,7 +7144,7 @@
     var je = Le.makeStyle;
     var Ke = (window.scratchblocks = (function (e) {
       var s = e.document;
-      function r(e, s) {
+      function i(e, s) {
         if (
           (((s = t({ style: "scratch2" }, s)).scale = s.scale || 1),
           "scratch2" === s.style)
@@ -7152,28 +7153,28 @@
         if (/^scratch3($|-)/.test(s.style)) return Ue(e, s);
         throw Error("Unknown style: " + s.style);
       }
-      function i(e, t) {
+      function r(e, t) {
         if ("function" == typeof t)
           throw Error("render() no longer takes a callback");
-        var s = r(e, t).render();
+        var s = i(e, t).render();
         return s.classList.add("scratchblocks-style-" + t.style), s;
       }
-      function n(e, r) {
-        r = t({ inline: !1 }, r);
-        var i = e.innerHTML.replace(/<br>\s?|\n|\r\n|\r/gi, "\n"),
+      function n(e, i) {
+        i = t({ inline: !1 }, i);
+        var r = e.innerHTML.replace(/<br>\s?|\n|\r\n|\r/gi, "\n"),
           n = s.createElement("pre");
-        n.innerHTML = i;
+        n.innerHTML = r;
         var o = n.textContent;
-        return r.inline && (o = o.replace("\n", "")), o;
+        return i.inline && (o = o.replace("\n", "")), o;
       }
-      function o(e, t, r, i) {
+      function o(e, t, i, r) {
         var n;
-        if (i.inline) {
+        if (r.inline) {
           n = s.createElement("span");
           var o = "scratchblocks scratchblocks-inline";
-          r.scripts[0] &&
-            !r.scripts[0].isEmpty &&
-            (o += " scratchblocks-inline-" + r.scripts[0].blocks[0].shape),
+          i.scripts[0] &&
+            !i.scripts[0].isEmpty &&
+            (o += " scratchblocks-inline-" + i.scripts[0].blocks[0].shape),
             (n.className = o),
             (n.style.display = "inline-block"),
             (n.style.verticalAlign = "middle");
@@ -7185,7 +7186,7 @@
           se.init(e), (pe.measuring = se.makeCanvas().getContext("2d"));
         })(e),
         (function (e) {
-          Oe.init(e), (xe.measuring = Oe.makeCanvas().getContext("2d"));
+          Oe.init(e), (Ne.measuring = Oe.makeCanvas().getContext("2d"));
         })(e),
         {
           allLanguages: C,
@@ -7200,14 +7201,14 @@
           Comment: G,
           Script: j,
           Document: K,
-          newView: r,
+          newView: i,
           read: n,
           parse: $,
           replace: o,
-          render: i,
-          renderMatching: function (e, r) {
+          render: r,
+          renderMatching: function (e, i) {
             (e = e || "pre.blocks"),
-              (r = t(
+              (i = t(
                 {
                   style: "scratch2",
                   inline: !1,
@@ -7215,20 +7216,20 @@
                   scale: 1,
                   read: n,
                   parse: $,
-                  render: i,
+                  render: r,
                   replace: o,
                 },
-                r,
+                i,
               )),
               [].slice.apply(s.querySelectorAll(e)).forEach(function (e) {
-                var t = r.read(e, r),
-                  s = r.parse(t, r),
-                  i = r.render(s, r);
-                r.replace(e, i, s, r);
+                var t = i.read(e, i),
+                  s = i.parse(t, i),
+                  r = i.render(s, i);
+                i.replace(e, r, s, i);
               });
           },
           appendStyles: function () {
-            s.head.appendChild(ke()), s.head.appendChild(je());
+            s.head.appendChild(Ae()), s.head.appendChild(je());
           },
         }
       );
@@ -7237,172 +7238,143 @@
   })();
   //# sourceMappingURL=scratchblocks.min.js.map
 
-  const extensionId = "geminiAPI";
   const defaultApiKey = "AIzaSyD2B46yojYB2AQzktJNR7jzIHRrqAISG9A";
+  let windowCreated = false;
+  let apiKey = defaultApiKey;
+  let selectedStyle = "scratch3";
+  let blockStyleSize = 0.75;
+  const guidelines =
+    "You are Pang. Any time you see 'Pang:' it means that you said that thing. Dont say 'Pang:' NO MATTER WHAT. Its already included in the response ui. You are an ai assistent to help you code in PenguinMod, a fork of Scratch. You can only answer to questions regarding how to do stuff in PenguinMod. PenguinMod is similar to TurboWarp. Here are some helpful resources https://docs.turbowarp.org/development/getting-started, https://github.com/PenguinMod/PenguinMod-Vm, https://extensions.turbowarp.org/, https://extensions.penguinmod.com/. Give simple responses, and dont use ANY formatting. Dont include stuff like 'or' or 'and' to show multiple things. Dont overcomplicate stuff, and dont fluff up your responses too much.Try to explain what it does AFTER you display the blocks. If people ask for extensions, link them to one of these websites https://extensions.turbowarp.org/, https://extensions.penguinmod.com/.Check the websites and see if it contains an extension the user wants, and tell them what extension it is. Fetch the lists of those websites. If they ask you about how to use an extension, try to help, but mention that you dont have access to the code of the extensions in the extenion libraries, and that your responses might not be correct. Dont say it directly though. Always do that. Dont use newlines. Dont use Markdown formatting, use HTML instead. Mark links as clickable with html, and open them in a new tab, not the current one. Dont create new questions for yourself, or answer things in the future.";
+  const syntax =
+    "When you asnwer with blocks, format them to be compatible with https://github.com/scratchblocks/scratchblocks. You can reference the syntax more from here https://en.scratch-wiki.info/wiki/Block_Plugin/Syntax. Make sure its valid code by checking the blocks at https://en.scratch-wiki.info/wiki/Blocks. Blocks are not inside square brackets. Number values are in round brackets and strings are in square brackets. Booleans are only in < >. Round brackets can also contain input names. Wrap all the blocks in ```scratch CODEHERE```.Math operations are all separate reporter blocks. Dont do stuff like(1-2+2), do ((1-1)+2) instead. For example you cant have (10+20-20) in the same block, its have to be ((10+20)-20).If statements should never be empty, aways add a placeholder block inside both the if and the else. Do not add comments inside if statements or any C type block! That is not valid syntax! A C type block is a block that wraps around others. For example if statements, forever looks, repeat until and so on. Also, C blocks dont need any square brackets! Dont do if[...]else[...]!!! That is wrong sytax!!! Do if ... else... instead. Place holder blocks should just be ... . Dont do anything else for placeholder blocks. All blocks that do comparison are treated like booleans, and they should therefore be in < >. For example, greated than, equal, smaller than, and, or and so on. Continuations of a C block can never be on the same line. You should not do if < > newline then you should instead do if < > then newline. For special hat blocks like 'when green flag clicked', you should not include any inputs, as the green flag is not an input. Inputs inside blocks dont need to be in any kind of bracket like < >, () or [] if they are already a normal block, that has a bracket. Dont forget that empty if statements still need a < > as a place holder for the sytax to be correct. Try to think in javascript, and then translate that to scratchblocks. Custom blocks cant take a list as an input, they can only have booleans, text and numbers. Effects blocks have the effect name in a dropdown input. For looks effects blocks, its always the effect name and the word 'effect' after. When you are using the 'contains' boolean block, it only has a dropdown if its refering to a list, otherwise, it is a string input.";
+  const references =
+    "Here are reference pieces of code:" +
+    JSON.stringify({
+      "Simple if then else statement": "if <  > then\n\nelse\n\nend\n",
+      "Example of using booleans":
+        "if <<mouse down?> and <(costume [number v]) = [1]>> then\n    stamp\nend",
+      "Move 10 steps": "move (10) steps\n",
+      "Say hi": "say [Hi]",
+      "Color inputs": "set pen color to [#1540bf]",
+      "Dropdown lists": "stop [all v]\n",
+      "Round dropdown lists": "broadcast (start v)\n",
+      "When green flag clicked": "when green flag clicked",
+      "When this sprite clicked": "when this sprite clicked\n",
+      "Turn right": "turn right () degrees",
+      "C blocks":
+        'C blocks must be closed by typing "end" after the last stack block inside it. However, C blocks at the end of a script will close automatically. For example:\n\nrepeat (10)\n    move (5) steps\n    stamp\nend\nrepeat (10)\n    move (10) steps\n    stamp',
+      "Block comments":
+        "Comments are created with two slashes: // comment after a block.\n\nmove (10) steps // is that too far?",
+      "Custom blocks": "define jump\nrepeat (10)\n    change y by (4)\nend",
+      "Custom block arguments":
+        "Number, boolean, and string arguments can be added:\n\ndefine jump (height) <gravity on?> [message]",
+      "Custom block inputs":
+        "If one tries to use an input reporter without making a block definition first, it will appear as a variable.\n\nsay (height) But if it is put below a block definition, it will render as an input reporter:\n\ndefine jump (height)\nsay (input)",
+      "List reporters":
+        "If one tries to write a list reporter, it will look like a variable reporter, because the plugin has no way of telling them apart.\n\nsay (list of Scratch team members) However, if one has used the list in a list block inside the same <scratchblocks> tag, then it will render correctly:\n\nadd [mres] to [list of Scratch team members v]\nadd [paddle2see] to [list of Scratch team members v]\nadd [harakou] to [list of Scratch team members v]\nsay (list of Scratch team members) If a list block is not wanted or needed inside the same <scratchblocks> tag, :: list can be used:\n\nsay (list of Scratch team members:: list)",
+      "Effect blocks":
+        "change [effectname v] effect by (25)\nset [geffectnamehost v] effect to (25)",
+      "Layer blocks": "go to [front v] layer\ngo [forward v] (5) layers",
+      "Looks reporters":
+        "(costume [number v])\n(costume [name v])\n(backdrop [number v])\n(backdrop [name v])",
+      "Looks effects list":
+        "color,fisheye,whirl,pixelate,mosaic,brightness,ghost,saturation,red,green,blue,opaque",
+      "Reporter 'when' blocks": "when [loudness v] > ()\nwhen [timer v] > ()",
+      "Control blocks":
+        "if <> then\n...\nend\n\nif <> then\n...\nelse\n...\nend\n\nwait until <>\n\nrepeat until <>\n...\nend\n\nrepeat (0)\n...\nend",
+    });
+  const context = guidelines + syntax + references;
+  let history = [];
+  let maxHistoryLength = 10;
 
-  const styles = {
-    smallMargin: "margin: 5px;",
-    smallPadding: "padding: 5px 10px;",
-    fontSize12: "font-size: 12px;",
-    whiteColor: "color: white;",
-    flexDisplay: "display: flex;",
-    flexCenter: "justify-content: center;",
-    width100: "width: 100%;",
-    height20: "height: 20px;",
-    bgColorDdd: "background-color: #ddd;",
-    cursorGrab: "cursor: grab;",
-    padding2: "padding: 2px;",
-    boxSizing: "box-sizing: border-box;",
-    textAlign: "text-align: center;",
-    positionAbsolute: "position: absolute;",
-    top2: "top: 2px;",
-    right2: "right: 2px;",
-    padding2_5: "padding: 2px 5px;",
-    fontSize10: "font-size: 10px;",
-    displayBlock: "display: block;",
-    marginTop10: "margin-top: 10px;",
-    width95: "width: 95%;",
-    padding5: "padding: 5px;",
-    marginBottom10: "margin-bottom: 10px;",
-  };
+  //css stuff
+  const basicWindowStyle = `
+    position: absolute;
+    top: 50px;
+    min-width: 300px;
+    min-height: 400px;
+    background-color: #333;
+    border: 1px solid white;
+    z-index: 1000;
+    resize: both;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    color: black;
+  `;
 
-  const stylesDark = {
-    smallMargin: "margin: 5px;",
-    smallPadding: "padding: 5px 10px;",
-    fontSize12: "font-size: 12px;",
-    whiteColor: "color: white;",
-    darkColor: "color: black;",
-    flexDisplay: "display: flex;",
-    flexCenter: "justify-content: center;",
-    width100: "width: 100%;",
-    height20: "height: 20px;",
-    bgColorDdd: "background-color: #444;",
-    bgColor222: "background-color: #222;",
-    cursorGrab: "cursor: grab;",
-    padding2: "padding: 2px;",
-    boxSizing: "box-sizing: border-box;",
-    textAlign: "text-align: center;",
-    positionAbsolute: "position: absolute;",
-    top2: "top: 2px;",
-    right2: "right: 2px;",
-    padding2_5: "padding: 2px 5px;",
-    fontSize10: "font-size: 10px;",
-    displayBlock: "display: block;",
-    marginTop10: "margin-top: 10px;",
-    width95: "width: 95%;",
-    padding5: "padding: 5px;",
-    marginBottom10: "margin-bottom: 10px;",
-  };
+  const basicTitlebarStyle = `
+    width: 100%;
+    height: 20px;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    font-size: 12px;
+    text-align: center;
+  `;
 
-  class GeminiExtension {
-    constructor(runtime) {
-      this.runtime = runtime;
-      this.windowCreated = false;
-      this.apiKey = defaultApiKey;
-      this.selectedStyle = "scratch3";
-      this.context =
-        "You are Pang. Any time you see 'Pang:' it means that you said that thing. Dont say 'Pang:' NO MATTER WHAT. Its already included in the response ui. You are an ai assistent to help you code in PenguinMod, a fork of Scratch. You can only answer to questions regarding how to do stuff in PenguinMod. PenguinMod is similar to TurboWarp. Here are some helpful resources https://docs.turbowarp.org/development/getting-started, https://github.com/PenguinMod/PenguinMod-Vm, https://extensions.turbowarp.org/, https://extensions.penguinmod.com/. Give simple responses, and dont use ANY formatting. Dont include stuff like 'or' or 'and' to show multiple things. Dont overcomplicate stuff, and dont fluff up your responses too much. When you asnwer with blocks, format them to be compatible with https://github.com/scratchblocks/scratchblocks. You can reference the syntax more from here https://en.scratch-wiki.info/wiki/Block_Plugin/Syntax. Make sure its valid code by checking the blocks at https://en.scratch-wiki.info/wiki/Blocks. Blocks are not inside square brackets. Number values are in round brackets and strings are in square brackets. Booleans are only in < >. Round brackets can also contain input names. Wrap all the blocks in ```scratch CODEHERE```. Try to explain what it does AFTER you display the blocks. If people ask for extensions, link them to one of these websites https://extensions.turbowarp.org/, https://extensions.penguinmod.com/. Check the websites and see if it contains an extension the user wants, and tell them what extension it is. Fetch the lists of those websites. If they ask you about how to use an extension, try to help, but mention that you dont have access to the code of the extensions in the extenion libraries, and that your responses might not be correct NO MATTER WHAT. Always do that. Dont use newlines. Dont use Markdown formatting, use HTML instead. Mark links as clickable with html, and open them in a new tab, not the current one. Math operations are all separate reporter blocks. For example you cant have (10+20-20) in the same block, its have to be ((10+20)-20).If statements should never be empty, aways add a placeholder block inside both the if and the then as well as the else.";
-      this.history = [];
-      this.maxHistoryLength = 10;
-      this.showWindow();
+  const basicButtonStyle = `
+    margin: 5px;
+    padding: 5px 10px;
+    font-size: 12px
+    color: white;
+    background-color: #555;
+  `;
 
-      if (typeof scratchblocks !== "undefined" && scratchblocks.init) {
-        scratchblocks.init();
-      }
-    }
+  const basicInputStyle = `
+    width: 90%;
+    height: 25px;
+    outline: none;
+    color: white;
+    background-color: #555;
+  `;
 
+  class pangpalgemini {
     getInfo() {
       return {
-        id: extensionId,
-        name: "Gemini API Extension",
-        blocks: [
-          {
-            opcode: "setApiKey",
-            blockType: Scratch.BlockType.COMMAND,
-            text: "Set API Key to [API_KEY]",
-            arguments: {
-              API_KEY: {
-                type: Scratch.ArgumentType.STRING,
-                defaultValue: "",
-              },
-            },
-          },
-          {
-            opcode: "setMaxHistory",
-            blockType: Scratch.BlockType.COMMAND,
-            text: "Set Max History Length to [MAX_HISTORY]",
-            arguments: {
-              MAX_HISTORY: {
-                type: Scratch.ArgumentType.NUMBER,
-                defaultValue: 10,
-              },
-            },
-          },
-        ],
+        id: "pangpalgemini",
+        name: "Pang Pal",
+        blocks: [],
       };
     }
 
     setApiKey(args) {
-      this.apiKey = args.API_KEY;
+      apiKey = args.API_KEY;
     }
 
     setMaxHistory(args) {
-      this.maxHistoryLength = args.MAX_HISTORY;
+      maxHistoryLength = args.MAX_HISTORY;
     }
 
     showWindow() {
-      if (!this.windowCreated) {
+      if (!windowCreated) {
         this.createWindow();
-        this.windowCreated = true;
+        windowCreated = true;
       }
-      this.geminiWindow.style.display = "block";
+      this.mainWindow.style.display = "block";
     }
 
     hideWindow() {
-      if (this.geminiWindow) {
-        this.geminiWindow.style.display = "none";
+      if (this.mainWindow) {
+        this.mainWindow.style.display = "none";
       }
     }
 
     createWindow() {
-      this.geminiWindow = document.createElement("div");
-      this.geminiWindow.id = "gemini-window";
-      this.geminiWindow.style.cssText = `
-        position: absolute;
-        top: 50px;
-        min-width: 300px;
-        min-height: 400px;
-        background-color: #333;
-        border: 1px solid white;
-        z-index: 1000;
-        resize: both;
-        overflow: auto;
-        display: flex;
-        flex-direction: column;
-        color: black;
-      `;
-      this.geminiWindow.style.maxWidth = screen.width * 0.5 + "px";
-      this.geminiWindow.style.maxHeight = screen.height * 0.5 + "px";
-      document.body.appendChild(this.geminiWindow);
+      this.mainWindow = document.createElement("div");
+      this.mainWindow.id = "main-window";
+      this.mainWindow.style.cssText = basicWindowStyle;
+      this.mainWindow.style.maxWidth = screen.width * 0.8 + "px";
+      this.mainWindow.style.maxHeight = screen.height * 0.8 + "px";
+      document.body.appendChild(this.mainWindow);
 
       this.titleBar = document.createElement("div");
-      this.titleBar.id = "gemini-title-bar";
-      this.titleBar.style.cssText = `
-        ${styles.width100}
-        ${styles.height20}
-        position: sticky;
-        top: 0;
-        ${styles.bgColor222}
-        ${styles.cursorGrab}
-        ${styles.padding2}
-        ${styles.boxSizing}
-        ${styles.fontSize12}
-        ${styles.textAlign}
-      `;
-      this.titleBar.textContent = "Gemini API";
-      this.geminiWindow.appendChild(this.titleBar);
+      this.titleBar.id = "main-title-bar";
+      this.titleBar.style.cssText = basicTitlebarStyle;
+      this.titleBar.textContent = "Pang Pal";
+      this.mainWindow.appendChild(this.titleBar);
 
-      this.makeDraggable(this.geminiWindow, this.titleBar);
+      this.makeDraggable(this.mainWindow, this.titleBar);
 
       this.responseArea = document.createElement("div");
       this.responseArea.style.cssText = `
@@ -7413,11 +7385,11 @@
         color: white;
       `;
 
-      this.geminiWindow.appendChild(this.responseArea);
+      this.mainWindow.appendChild(this.responseArea);
 
       this.inputContainer = document.createElement("div");
       this.inputContainer.style.cssText = `
-        ${styles.flexDisplay}
+        display: flex;
         align-items: center;
         flex-direction: column;
         bottom: 0;
@@ -7425,18 +7397,11 @@
         padding: 5px;
         border-top: 1px solid #ccc;
       `;
-      this.geminiWindow.appendChild(this.inputContainer);
+      this.mainWindow.appendChild(this.inputContainer);
 
       this.promptInput = document.createElement("input");
       this.promptInput.type = "text";
-      this.promptInput.style.cssText = `
-        width: 90%;
-        height: 25px;
-        ${styles.smallMargin}
-        outline: none;
-        ${styles.whiteColor}
-        background-color: #555;
-      `;
+      this.promptInput.style.cssText = basicInputStyle;
       this.inputContainer.appendChild(this.promptInput);
 
       this.promptInput.addEventListener("keydown", (event) => {
@@ -7448,25 +7413,18 @@
 
       this.buttonContainer = document.createElement("div");
       this.buttonContainer.style.cssText = `
-        ${styles.flexDisplay}
-        ${styles.flexCenter}
-        ${styles.width100}
-        margin-top: 5px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
       `;
       this.inputContainer.appendChild(this.buttonContainer);
 
       this.sendButton = document.createElement("button");
       this.sendButton.textContent = "Send";
-      this.sendButton.style.cssText = `
-        ${styles.smallMargin}
-        ${styles.smallPadding}
-        ${styles.fontSize12}
-        ${styles.whiteColor}
-        background-color: #555;
-      `;
+      this.sendButton.style.cssText = basicButtonStyle;
       this.buttonContainer.appendChild(this.sendButton);
       this.sendButton.onclick = () => {
-        const prompt = this.context + " " + this.promptInput.value;
+        const prompt = this.promptInput.value;
         this.getGeminiResponse(prompt);
         this.promptInput.value = "";
         this.promptInput.focus();
@@ -7474,12 +7432,7 @@
 
       this.settingsButton = document.createElement("button");
       this.settingsButton.textContent = "Settings";
-      this.settingsButton.style.cssText = `
-        ${styles.smallMargin}
-        ${styles.smallPadding}
-        ${styles.fontSize12}
-        ${styles.whiteColor}
-      `;
+      this.settingsButton.style.cssText = basicButtonStyle;
       this.buttonContainer.appendChild(this.settingsButton);
       this.settingsButton.onclick = () => {
         this.openSettingsWindow();
@@ -7488,70 +7441,43 @@
 
     openSettingsWindow() {
       this.settingsWindow = document.createElement("div");
-      this.settingsWindow.id = "gemini-settings-window";
-      this.settingsWindow.style.cssText = this.geminiWindow.style.cssText;
+      this.settingsWindow.id = "settings-window";
+      this.settingsWindow.style.cssText = basicWindowStyle;
       document.body.appendChild(this.settingsWindow);
 
       this.settingsTitleBar = document.createElement("div");
-      this.settingsTitleBar.id = "gemini-settings-title-bar";
-      this.settingsTitleBar.style.cssText = `
-        position: sticky;
-        top: 0;
-        ${styles.bgColor222}
-        ${styles.cursorGrab}
-        ${styles.padding2}
-        ${styles.boxSizing}
-        ${styles.fontSize12}
-        ${styles.textAlign}
-      `;
-      this.settingsTitleBar.textContent = "Gemini API Settings";
+      this.settingsTitleBar.id = "settings-title-bar";
+      this.settingsTitleBar.style.cssText = basicTitlebarStyle;
+      this.settingsTitleBar.textContent = "Pang Pal Settings";
       this.settingsWindow.appendChild(this.settingsTitleBar);
 
       this.apiKeyLabel = document.createElement("label");
       this.apiKeyLabel.textContent = "API Key:";
-      this.apiKeyLabel.style.cssText = `${styles.displayBlock} ${styles.marginTop10}`;
+      this.apiKeyLabel.style.cssText = ``;
       this.settingsWindow.appendChild(this.apiKeyLabel);
 
       this.apiKeyInput = document.createElement("input");
       this.apiKeyInput.type = "text";
-      this.apiKeyInput.style.cssText = `
-        ${styles.width95}
-        ${styles.padding5}
-        ${styles.marginBottom10}
-        ${styles.whiteColor}
-        background-color: #555;
-      `;
+      this.apiKeyInput.style.cssText = basicInputStyle;
       this.settingsWindow.appendChild(this.apiKeyInput);
 
       this.historyLengthLabel = document.createElement("label");
       this.historyLengthLabel.textContent = "Max History Length:";
-      this.historyLengthLabel.style.cssText = `${styles.displayBlock} ${styles.marginTop10}`;
+      this.historyLengthLabel.style.cssText = ``;
       this.settingsWindow.appendChild(this.historyLengthLabel);
 
       this.historyLengthInput = document.createElement("input");
       this.historyLengthInput.type = "number";
-      this.historyLengthInput.style.cssText = `
-        ${styles.width95}
-        ${styles.padding5}
-        ${styles.marginBottom10}
-        ${styles.whiteColor}
-        background-color: #555;
-      `;
+      this.historyLengthInput.style.cssText = ``;
       this.settingsWindow.appendChild(this.historyLengthInput);
 
       this.styleLabel = document.createElement("label");
       this.styleLabel.textContent = "Scratchblocks Style:";
-      this.styleLabel.style.cssText = `${styles.displayBlock} ${styles.marginTop10}`;
+      this.styleLabel.style.cssText = ``;
       this.settingsWindow.appendChild(this.styleLabel);
 
       this.styleSelect = document.createElement("select");
-      this.styleSelect.style.cssText = `
-        ${styles.width95}
-        ${styles.padding5}
-        ${styles.marginBottom10}
-        ${styles.whiteColor}
-        background-color: #555;
-      `;
+      this.styleSelect.style.cssText = ``;
       const stylesList = ["scratch2", "scratch3", "scratch3-high-contrast"];
       stylesList.forEach((style) => {
         const option = document.createElement("option");
@@ -7565,39 +7491,33 @@
 
       this.saveButton = document.createElement("button");
       this.saveButton.textContent = "Save";
-      this.saveButton.style.cssText = `
-        ${styles.smallPadding}
-        ${styles.fontSize12}
-        ${styles.whiteColor}
-        background-color: #555;
-      `;
+      this.saveButton.style.cssText = basicButtonStyle;
       this.settingsWindow.appendChild(this.saveButton);
       this.saveButton.onclick = () => {
-        this.apiKey = this.apiKeyInput.value;
+        apiKey = this.apiKeyInput.value;
         let historyLength = parseInt(this.historyLengthInput.value);
         if (isNaN(historyLength)) {
           historyLength = 5;
         }
-        this.maxHistoryLength = historyLength;
-        this.selectedStyle = this.styleSelect.value;
+        maxHistoryLength = historyLength;
+        selectedStyle = this.styleSelect.value;
+        switch (selectedStyle) {
+          case "scratch2":
+            blockStyleSize = 1.2;
+            break;
+          default:
+            blockStyleSize = 0.75;
+        }
         this.settingsWindow.style.display = "none";
       };
 
-      this.apiKeyInput.value = this.apiKey;
-      this.historyLengthInput.value = this.maxHistoryLength || 10;
-      this.styleSelect.value = this.selectedStyle || "scratch3";
+      this.apiKeyInput.value = apiKey;
+      this.historyLengthInput.value = maxHistoryLength || 10;
+      this.styleSelect.value = selectedStyle || "scratch3";
 
       this.settingsCloseButton = document.createElement("button");
       this.settingsCloseButton.textContent = "X";
-      this.settingsCloseButton.style.cssText = `
-        ${styles.positionAbsolute}
-        ${styles.top2}
-        ${styles.right2}
-        ${styles.padding2_5}
-        ${styles.fontSize10}
-        ${styles.whiteColor}
-        background-color: #555;
-      `;
+      this.settingsCloseButton.style.cssText = basicButtonStyle;
       this.settingsTitleBar.appendChild(this.settingsCloseButton);
       this.settingsCloseButton.onclick = () => {
         this.settingsWindow.style.display = "none";
@@ -7637,31 +7557,26 @@
         document.onmousemove = null;
       }
     }
-
     async getGeminiResponse(prompt) {
-      if (!this.apiKey) {
+      if (!apiKey) {
         this.responseArea.textContent =
           "API Key not set. Use the 'Set API Key' block.";
         return;
       }
-
+      console.log(history);
       let conversationHistory = "";
-      const historyLength = Math.min(
-        this.history.length,
-        this.maxHistoryLength || 5,
-      );
-      for (
-        let i = Math.max(0, this.history.length - historyLength);
-        i < this.history.length;
-        i++
-      ) {
-        conversationHistory += this.history[i];
+      if (history.length > maxHistoryLength) {
+        history.shift();
       }
-
       const fullPrompt =
-        this.context + " " + conversationHistory + " " + prompt;
+        context +
+        " " +
+        " This is your conversation history, do not repeat it in your response!!!: " +
+        history +
+        " " +
+        prompt;
 
-      const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${this.apiKey}`;
+      const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
       const data = {
         contents: [{ parts: [{ text: fullPrompt }] }],
@@ -7681,7 +7596,6 @@
         });
 
         const result = await apiResponse.json();
-        console.log(result);
 
         if (
           result.candidates &&
@@ -7691,9 +7605,13 @@
           result.candidates[0].content.parts.length > 0
         ) {
           const responseText = result.candidates[0].content.parts[0].text;
+          const responseTextDecoded = responseText.replace(
+            /\\u([0-9a-fA-F]{4})/g,
+            (match, group1) => String.fromCharCode(parseInt(group1, 16)),
+          );
           const responseId = `response-${Date.now()}`;
-          let processedResponseText = responseText;
-          +document.getElementById("generating-temp").remove();
+          let processedResponseText = responseTextDecoded;
+          document.getElementById("generating-temp").remove();
           const scratchCodeRegex = /```scratch\n([\s\S]*?)```/g;
           let match;
           let scratchblocksHTML = "";
@@ -7713,9 +7631,13 @@
 
           while ((match = scratchCodeRegex.exec(responseText)) !== null) {
             const scratchCode = match[1];
+            console.log(scratchCode);
             const pre = document.createElement("pre");
-            pre.innerHTML = scratchCode;
-            scratchblocksHTML = pre.outerHTML;
+            pre.innerHTML = scratchCode
+              .replace(/</g, "&lt;")
+              .replace(/>/g, "&gt;");
+            console.log(pre.innerHTML);
+            scratchblocksHTML += pre.outerHTML;
             try {
               if (scratchblocks && scratchblocks.renderMatching) {
               }
@@ -7727,8 +7649,12 @@
               console.error("Error rendering scratchblocks", e);
             }
           }
+          processedResponseText = processedResponseText;
           this.responseArea.innerHTML += `<div class="${responseId}"><b>Pang:</b> ${processedResponseText.replace(/([.?!])\s*(?=[A-Z])/g, "$1<br>")}<br>${scratchblocksHTML}</div>`;
-          this.history.push("<b>Prompt:</b> " + prompt + "/n");
+          console.log(prompt);
+          history.push(
+            "<b>Prompt:</b> " + prompt + "/n" + "<b>Pang:</b>" + responseText,
+          );
           const newResponseDiv = this.responseArea.querySelector(
             `.${responseId}`,
           );
@@ -7736,8 +7662,8 @@
             setTimeout(() => {
               if (scratchblocks && scratchblocks.renderMatching) {
                 scratchblocks.renderMatching(`.${responseId} pre`, {
-                  style: this.selectedStyle,
-                  scale: 0.75,
+                  style: selectedStyle,
+                  scale: blockStyleSize,
                 });
               }
             }, 0);
@@ -7746,11 +7672,10 @@
           this.responseArea.textContent = "No response from Gemini API.";
         }
       } catch (apiError) {
-        console.error("Error fetching Gemini response:", apiError);
         this.responseArea.textContent = `Error fetching response from Gemini API: ${apiError.message}`;
+        console.error(this.responseArea.textContent);
       }
     }
   }
-
-  Scratch.extensions.register(new GeminiExtension());
+  Scratch.extensions.register(new pangpalgemini());
 })();
