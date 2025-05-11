@@ -7315,9 +7315,9 @@ if (typeof scaffolding == "undefined") {
     let selectedStyle = "scratch3";
     let blockStyleSize = 0.75;
     const guidelines =
-      "You are Pang. Any time you see 'Pang:' it means that you said that thing. Dont say 'Pang:' NO MATTER WHAT. Its already included in the response ui. You are an ai assistent to help you code in PenguinMod, a fork of Scratch. You can only answer to questions regarding how to do stuff in PenguinMod. PenguinMod is similar to TurboWarp. Here are some helpful resources https://docs.turbowarp.org/development/getting-started, https://github.com/PenguinMod/PenguinMod-Vm, https://extensions.turbowarp.org/, https://extensions.penguinmod.com/. Give simple responses, and dont use ANY formatting. Dont include stuff like 'or' or 'and' to show multiple things. Dont overcomplicate stuff, and dont fluff up your responses too much.Try to explain what it does AFTER you display the blocks. If people ask for extensions, link them to one of these websites https://extensions.turbowarp.org/, https://extensions.penguinmod.com/.Check the websites and see if it contains an extension the user wants, and tell them what extension it is. Fetch the lists of those websites. If they ask you about how to use an extension, try to help, but mention that you dont have access to the code of the extensions in the extenion libraries, and that your responses might not be correct. Dont say it directly though. Always do that. Dont use newlines. Dont use Markdown formatting, use HTML instead. Mark links as clickable with html, and open them in a new tab, not the current one. Dont create new questions for yourself, or answer things in the future. Try to be polite! Never explain stuff in text, always explain stuff using comments, and nothing else. If someone asks you to make a full project dont say you cant, give them snippest that could help them instead, just dont leave an empty response with nothing to show. If someone asks you to make a script that draws an image, tell them you cant visualize images to draw them with code. You dont have access to the users workspace, you cant see what blocks they placed down. Please specify that when needed.";
+      "You are Pang. Any time you see 'Pang:' it means that you said that thing. Dont say 'Pang:' NO MATTER WHAT. Its already included in the response ui. You are an ai assistent to help you code in PenguinMod, a fork of Scratch. You can only answer to questions regarding how to do stuff in PenguinMod. PenguinMod is similar to TurboWarp. Here are some helpful resources https://docs.turbowarp.org/development/getting-started, https://github.com/PenguinMod/PenguinMod-Vm, https://extensions.turbowarp.org/, https://extensions.penguinmod.com/. Give simple responses, and dont use ANY formatting. Dont include stuff like 'or' or 'and' to show multiple things. Dont overcomplicate stuff, and dont fluff up your responses too much.Try to explain what it does AFTER you display the blocks. If people ask for extensions, link them to one of these websites https://extensions.turbowarp.org/, https://extensions.penguinmod.com/.Check the websites and see if it contains an extension the user wants, and tell them what extension it is. Fetch the lists of those websites. If they ask you about how to use an extension, try to help, but mention that you dont have access to the code of the extensions in the extenion libraries, and that your responses might not be correct. Dont say it directly though. Always do that. Dont use newlines. Dont use Markdown formatting, use HTML instead. Mark links as clickable with html, and open them in a new tab, not the current one. Dont create new questions for yourself, or answer things in the future. Try to be polite! Never explain stuff in text, always explain stuff using comments, and nothing else. Dont overuse comments, only use them to explain what is needed, dont tell me what every single block does. If someone asks you to make a full project dont say you cant, give them snippest that could help them instead, just dont leave an empty response with nothing to show. If someone asks you to make a script that draws an image, tell them you cant visualize images to draw them with code. You dont have access to the users workspace, you cant see what blocks they placed down. Please specify that when needed.";
     const syntax =
-      "When you asnwer with blocks, format them to be compatible with https://github.com/scratchblocks/scratchblocks. You can reference the syntax more from here https://en.scratch-wiki.info/wiki/Block_Plugin/Syntax. Make sure its valid code by checking the blocks at https://en.scratch-wiki.info/wiki/Blocks. Blocks are not inside square brackets. Number values are in round brackets and strings are in square brackets. Booleans are only in < >. Round brackets can also contain input names. Wrap all the blocks in ```scratch CODEHERE```.Math operations are all separate reporter blocks. Dont do stuff like(1-2+2), do ((1-1)+2) instead. For example you cant have (10+20-20) in the same block, its have to be ((10+20)-20).If statements should never be empty, aways add a placeholder block inside both the if and the else. Do not add comments inside if statements or any C type block! That is not valid syntax! A C type block is a block that wraps around others. For example if statements, forever looks, repeat until and so on. Also, C blocks dont need any square brackets! Dont do if[...]else[...]!!! That is wrong sytax!!! Do if ... else... instead. Place holder blocks should just be ... . Dont do anything else for placeholder blocks. All blocks that do comparison are treated like booleans, and they should therefore be in < >. For example, greated than, equal, smaller than, and, or and so on. Continuations of a C block can never be on the same line. You should not do if < > newline then you should instead do if < > then newline. For special hat blocks like 'when green flag clicked', you should not include any inputs, as the green flag is not an input. Inputs inside blocks dont need to be in any kind of bracket like < >, () or [] if they are already a normal block, that has a bracket. Dont forget that empty if statements still need a < > as a place holder for the sytax to be correct. Try to think in javascript, and then translate that to scratchblocks. Custom blocks cant take a dropdown as an input, they can only have booleans, text and numbers, so define sort list [thing v] is not possible, but [thing],(thing),<thing> are. Effects blocks have the effect name in a dropdown input. For looks effects blocks, its always the effect name and the word 'effect' after. When you are using the 'contains' boolean block, it only has a dropdown if its refering to a list, otherwise, it is a string input. If you pass a list through an input, you dont get an array or a useful format, in custom blocks that require a list for example, you should make the input be the name of the list, and then get its values in the custom block. List blocks can only select the list from a dropdown, so its not lenght of [list] its length of [list v]. Dropdowns can only be strings, not numbers, so (thing v) is not correct, but [thing v] is. Mathematical operations with use the operations and are always like this ([ v]of(number)), for example ([cos v]of(25)), it does not start with mathop though! Its only the function name in a dropdown! Operator blocks dont have to be inside another operator all the time, for example 'or' is <<>or<>>, not <<<>or<>>>, doing that just puts it in an empty boolean block that does nothing.Blocks like (10+10) or (10/10) dont exist, only ((10)+(10)) and ((10)/(10)). To run code inside a clone, you have to use the 'when i start as a clone' hat block. The 'touching' boolean block is structured like <touching[thing v]?>. When you refer to the position of the sprite, the variable name is x position, not just x. Hat blocks never end with 'end'.";
+      "When you asnwer with blocks, format them to be compatible with https://github.com/scratchblocks/scratchblocks. You can reference the syntax more from here https://en.scratch-wiki.info/wiki/Block_Plugin/Syntax. Make sure its valid code by checking the blocks at https://en.scratch-wiki.info/wiki/Blocks. Blocks are not inside square brackets. Number values are in round brackets and strings are in square brackets. Booleans are only in < >. Round brackets can also contain input names. Wrap all the blocks in ```scratch CODEHERE```.Math operations are all separate reporter blocks. Dont do stuff like(1-2+2), do ((1-1)+2) instead. For example you cant have (10+20-20) in the same block, its have to be ((10+20)-20).If statements should never be empty, aways add a placeholder block inside both the if and the else. Comments cannot be inside the code, they can only be next to a block, not under or on top of it.Do not add comments inside if statements or any C type block! That is not valid syntax! A C type block is a block that wraps around others. For example if statements, forever looks, repeat until and so on. Also, C blocks dont need any square brackets! Dont do if[...]else[...]!!! That is wrong sytax!!! Do if ... else... instead. Place holder blocks should just be ... . Dont do anything else for placeholder blocks. All blocks that do comparison are treated like booleans, and they should therefore be in < >. For example, greated than, equal, smaller than, and, or and so on. Continuations of a C block can never be on the same line. You should not do if < > newline then you should instead do if < > then newline. For special hat blocks like 'when green flag clicked', you should not include any inputs, as the green flag is not an input. Inputs inside blocks dont need to be in any kind of bracket like < >, () or [] if they are already a normal block, that has a bracket. Dont forget that empty if statements still need a < > as a place holder for the sytax to be correct. Try to think in javascript, and then translate that to scratchblocks. Custom blocks cant take a dropdown as an input, they can only have booleans, text and numbers, so define sort list [thing v] is not possible, but [thing],(thing),<thing> are. Effects blocks have the effect name in a dropdown input. For looks effects blocks, its always the effect name and the word 'effect' after. When you are using the 'contains' boolean block, it only has a dropdown if its refering to a list, otherwise, it is a string input. If you pass a list through an input, you dont get an array or a useful format, in custom blocks that require a list for example, you should make the input be the name of the list, and then get its values in the custom block. List blocks can only select the list from a dropdown, so its not lenght of [list] its length of [list v]. Dropdowns can only be strings, not numbers, so (thing v) is not correct, but [thing v] is. Mathematical operations with use the operations and are always like this ([ v]of(number)), for example ([cos v]of(25)), it does not start with mathop though! Its only the function name in a dropdown! Operator blocks dont have to be inside another operator all the time, for example 'or' is <<>or<>>, not <<<>or<>>>, doing that just puts it in an empty boolean block that does nothing.Blocks like (10+10) or (10/10) dont exist, only ((10)+(10)) and ((10)/(10)). To run code inside a clone, you have to use the 'when i start as a clone' hat block. The 'touching' boolean block is structured like <touching[thing v]?>. When you refer to the position of the sprite, the variable name is x position, not just x. Hat blocks never end with 'end'.";
     const references =
       "Here are reference pieces of code:" +
       JSON.stringify({
@@ -7468,7 +7468,6 @@ if (typeof scaffolding == "undefined") {
     `;
 
       mainWindow.appendChild(responseArea);
-
       let inputContainer = document.createElement("div");
       inputContainer.style.cssText = `
       display: flex;
@@ -7481,7 +7480,7 @@ if (typeof scaffolding == "undefined") {
       padding-top: 10px;
     `;
       mainWindow.appendChild(inputContainer);
-
+      makeDraggable(mainWindow, inputContainer);
       promptInput = document.createElement("input");
       promptInput.type = "text";
       promptInput.placeholder = "Type here to ask for help";
@@ -7609,14 +7608,52 @@ if (typeof scaffolding == "undefined") {
 
       handle.onmousedown = dragMouseDown;
 
-      // i stole this i have no idea what it does
+      // i stole this and slightly modified it. I dont actually know how it works lmao
       function dragMouseDown(e) {
         e = e || window.event;
+        if (e.button !== 0) return;
+        const target = e.target;
+        if (
+          target.tagName === "BUTTON" ||
+          target.tagName === "INPUT" ||
+          target.tagName === "SELECT" ||
+          target.tagName === "TEXTAREA" ||
+          target.onclick
+        ) {
+          return;
+        }
         e.preventDefault();
         pos3 = e.clientX;
         pos4 = e.clientY;
         document.onmouseup = closeDragElement;
         document.onmousemove = elementDrag;
+        //fixes a weird css quirk. This is very stupid code
+        //min fix
+        if (
+          parseInt(element.style.height, 10) <
+          parseInt(element.style.minHeight, 10)
+        ) {
+          element.style.height = element.style.minHeight;
+        }
+        if (
+          parseInt(element.style.width, 10) <
+          parseInt(element.style.minWidth, 10)
+        ) {
+          element.style.width = element.style.minWidth;
+        }
+        //max fix
+        if (
+          parseInt(element.style.height, 10) >
+          parseInt(element.style.maxHeight, 10)
+        ) {
+          element.style.height = element.style.maxHeight;
+        }
+        if (
+          parseInt(element.style.width, 10) >
+          parseInt(element.style.maxWidth, 10)
+        ) {
+          element.style.width = element.style.maxWidth;
+        }
       }
 
       function elementDrag(e) {
@@ -7626,8 +7663,16 @@ if (typeof scaffolding == "undefined") {
         pos2 = pos4 - e.clientY;
         pos3 = e.clientX;
         pos4 = e.clientY;
-        element.style.top = element.offsetTop - pos2 + "px";
-        element.style.left = element.offsetLeft - pos1 + "px";
+        element.style.top =
+          Math.min(
+            Math.max(element.offsetTop - pos2, 0),
+            window.innerHeight - parseInt(element.style.height, 10) - 5,
+          ) + "px";
+        element.style.left =
+          Math.min(
+            Math.max(element.offsetLeft - pos1, 0),
+            window.innerWidth - parseInt(element.style.width, 10) - 5,
+          ) + "px";
       }
 
       function closeDragElement() {
@@ -7636,6 +7681,19 @@ if (typeof scaffolding == "undefined") {
       }
     }
     async function getGeminiResponse(prompt) {
+      const style = document.createElement("style");
+      style.textContent = `
+        .fade-in {
+          opacity: 0;
+          transition: opacity 0.5s ease-in-out;
+        }
+
+        .fade-in.loaded {
+          opacity: 1;
+        }
+      `;
+      document.head.appendChild(style);
+
       if (!apiKey) {
         responseArea.textContent =
           "API Key not set. Set your Key in the settings.";
@@ -7664,7 +7722,7 @@ if (typeof scaffolding == "undefined") {
         responseArea.innerHTML +=
           "<b>You:</b> " +
           promptInput.value +
-          "<br><div id='generating-temp'>Generating...</div>";
+          "<br><div id='generating-temp'>...</div>";
         const apiResponse = await fetch(geminiUrl, {
           method: "POST",
           headers: {
@@ -7728,7 +7786,7 @@ if (typeof scaffolding == "undefined") {
             }
           }
           processedResponseText = processedResponseText;
-          responseArea.innerHTML += `<div class="${responseId}"><b>Pang:</b> ${processedResponseText.replace(/([.?!])\s*(?=[A-Z])/g, "$1<br>")}<br>${scratchblocksHTML}</div>`;
+          responseArea.innerHTML += `<div class="${responseId} fade-in\"><b>Pang:</b> ${processedResponseText.replace(/([.?!])\\s*(?=[A-Z])/g, "$1<br>")}<br>${scratchblocksHTML}</div>`;
           console.log(prompt);
           history.push(
             "<b>Prompt:</b> " + prompt + "/n" + "<b>Pang:</b>" + responseText,
@@ -7736,6 +7794,7 @@ if (typeof scaffolding == "undefined") {
           const newResponseDiv = responseArea.querySelector(`.${responseId}`);
           if (newResponseDiv) {
             setTimeout(() => {
+              newResponseDiv.classList.add("loaded");
               if (scratchblocks && scratchblocks.renderMatching) {
                 scratchblocks.renderMatching(`.${responseId} pre`, {
                   style: selectedStyle,
@@ -7743,6 +7802,7 @@ if (typeof scaffolding == "undefined") {
                 });
               }
             }, 0);
+            responseArea.scrollTop = responseArea.scrollHeight;
           }
         } else {
           responseArea.textContent = "No response from Gemini API.";
