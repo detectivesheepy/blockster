@@ -1,3 +1,4 @@
+![icon](https://github.com/user-attachments/assets/6c2c404e-401d-454f-8e10-6675760c4111)
 # Block AI
 The first ever chatbot to help you code in Scratch (TurboWarp/PenguinMod)
 
