@@ -13,7 +13,7 @@ Copy the text from [here](https://extensions.penguinmod.com/extensions/TheShovel
 It uses Gemini 2.0 flash with a huge block of text with a lot of information regarding [scratchblocks](https://github.com/scratchblocks/scratchblocks) and how Scratch works. It then renders the output with scratchblocks and tries to explain what it did.
 
 # Limitations
-It will make A LOT of syntax errors. It's unavoidable. This is far from perfect in terms of logic as well, and it won't improve by much because of the way is built. Along with that, it doesn't know much about extensions. It can't help you use extensions at all.
+It will make A LOT of syntax errors. It's unavoidable. This is far from perfect in terms of logic as well, and it won't improve by much because of the way is built. Along with that, it doesn't know much about extensions. It can't help you use extensions at all.  
 This is meant to be a proof of concept more than anything.
 
 # Example uses
