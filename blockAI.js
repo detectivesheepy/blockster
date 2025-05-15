@@ -1,5 +1,5 @@
-// Name: Block AI
-// ID: pangpalgemini
+// Name: Blockster AI
+// ID: blockstergemini
 // Description: An AI powered chat bot to help you code in your projects.
 // By: TheShovel <https://theshovel.rocks/>
 // License: MIT
